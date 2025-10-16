@@ -1,0 +1,13 @@
+{
+  "name": "span-marketplace",
+  "owner": {
+    "name": "John Harris"
+  },
+  "plugins": [
+  {
+    "name": "module-builder-plugin",
+    "source": "./module-builder",
+    "description": "Module Builder plugin for internal use"
+  }
+]
+}

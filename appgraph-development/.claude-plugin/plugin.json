@@ -1,0 +1,9 @@
+{
+    "name": "appgraph-development",
+    "description": "A plugin built for developers using Alucify's AppGraph for development.",
+    "version": "1.0.0",
+    "author": {
+        "name": "Chris Macomber",
+        "email": "chris@alucify.ai"
+    }
+}
