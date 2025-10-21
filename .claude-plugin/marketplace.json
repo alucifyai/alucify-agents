@@ -1,13 +1,13 @@
 {
-  "name": "span-marketplace",
+  "name": "alucify-marketplace",
   "owner": {
-    "name": "John Harris"
+    "name": "Chris Macomber"
   },
   "plugins": [
   {
-    "name": "module-builder-plugin",
-    "source": "./module-builder",
-    "description": "Module Builder plugin for internal use"
+    "name": "appgraph-development",
+    "source": "./appgraph-development",
+    "description": "Plugin to be used with AppGraph development"
   }
 ]
 }
