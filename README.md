@@ -92,14 +92,13 @@ This repository contains a Claude Code marketplace with the `appgraph-developmen
 1. Clone this repository:
    ```bash
    git clone --branch cg-langbuilder https://github.com/your-org/alucify-agents.git
-   cd alucify-agents
    ```
 #### Global Installation
 2. Copy agents to your Claude Code agents directory:
    ```bash
    # For macOS/Linux
-   mkdir -p ~/.claude-code/agents/appgraph-development
-   cp -r appgraph-development/agents/* ~/.claude-code/agents/appgraph-development/
+   mkdir -p ~/.claude-code/agents
+   cp -r alucify-agents/* ~/.claude-code/agents/
 
    # For Windows (PowerShell)
    New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude-code\agents\appgraph-development"
@@ -119,7 +118,7 @@ Install agents locally in your project:
 
 3. Copy agent files:
    ```bash
-   cp -r path/to/alucify-agents/appgraph-development/agents/* .claude/agents/
+   cp -r path/to/alucify-agents/* .claude/agents/
    ```
 
 3. Claude Code will automatically discover these agents
