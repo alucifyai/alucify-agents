@@ -4,25 +4,32 @@ A comprehensive suite of specialized Claude Code agents for AppGraph-driven soft
 
 ## Overview
 
-This repository contains 7 specialized Claude Code agents that work together to implement a complete software development lifecycle based on AppGraph specifications, PRDs, and architecture documents. The agents follow a systematic approach to ensure code quality, implementation plan alignment, and comprehensive test coverage.
+This repository contains 9 specialized Claude Code agents that work together to implement a complete software development lifecycle based on AppGraph specifications, PRDs, and architecture documents. The agents follow a systematic approach to ensure code quality, implementation plan alignment, and comprehensive test coverage.
 
 ## Agents Overview
 
 ### Planning & Analysis Agents
 
-1. **implementation-planner** (Green)
+1. **planning-orchestrator** (Magenta) - NEW!
+   - Orchestrates the complete planning workflow end-to-end
+   - Automatically executes implementation-planner → plan-auditor → plan-refiner
+   - Analyzes audit reports and triggers refinement when issues are found
+   - Provides a streamlined, automated planning experience
+   - Output: Complete audit-approved implementation plan
+
+2. **implementation-planner** (Green)
    - Creates detailed implementation plans from PRD and AppGraph
    - Identifies new and modified nodes/edges
    - Breaks down features into phases and tasks with impact subgraphs
    - Output: `.alucify/implementation-plans/[feature]-implementation-plan.md`
 
-2. **plan-auditor** (Blue)
+3. **plan-auditor** (Blue)
    - Audits implementation plans for completeness and alignment
    - Validates PRD coverage, AppGraph alignment, tech stack compliance
    - Identifies gaps and drifts
    - Output: `.alucify/implementation-plans/[feature]-implementation-plan-audit.md`
 
-3. **plan-refiner** (Purple)
+4. **plan-refiner** (Purple)
    - Refines implementation plans based on audit findings
    - Addresses critical, major, and minor issues
    - Produces complete, standalone updated plans
@@ -30,36 +37,92 @@ This repository contains 7 specialized Claude Code agents that work together to 
 
 ### Implementation & Quality Assurance Agents
 
-4. **task-implementer** (Orange)
+5. **task-orchestrator** (Teal) - NEW!
+   - Orchestrates the complete implementation workflow end-to-end
+   - Automatically executes task-implementer → test-executor → code-auditor → code-fixer
+   - Analyzes audit reports and triggers fixes when issues are found
+   - Provides a streamlined, automated implementation experience
+   - Output: Production-ready, audit-approved code
+
+6. **task-implementer** (Orange)
    - Implements specific tasks from implementation plans
    - Follows 4-step process: Analysis → Implementation → Testing → Validation
    - Generates production code and comprehensive unit tests
    - Output: Code files, test files, and validation report
 
-5. **test-executor** (Yellow)
+7. **test-executor** (Yellow)
    - Executes unit tests for implemented tasks
    - Collects comprehensive test statistics and coverage metrics
    - Analyzes test failures and performance
    - Output: `docs/code-generations/[task-id]-test-report.md`
 
-6. **code-auditor** (Cyan)
+8. **code-auditor** (Cyan)
    - Audits implemented code for compliance and quality
    - Validates implementation plan alignment, code quality, test coverage
    - Detects unrequired functionality and scope drift
    - Output: `docs/code-generations/[task-id]-implementation-audit.md`
 
-7. **code-fixer** (Red)
+9. **code-fixer** (Red)
    - Fixes issues identified in audit and test reports
    - Traces root causes via AppGraph impact subgraph
    - Addresses critical, high, and medium priority issues iteratively
    - Handles pre-existing and related issues
    - Output: `docs/code-generations/[task-id]-gap-resolution-report.md`
 
+## Repository Structure
+
+This repository is organized as a Claude Code marketplace containing a plugin:
+
+```
+alucify-agents/
+├── .claude-plugin/
+│   └── marketplace.json          # Marketplace definition
+├── appgraph-development/         # Plugin directory
+│   ├── .claude-plugin/
+│   │   └── plugin.json          # Plugin metadata
+│   ├── agents/                  # Agent definitions
+│   │   ├── planning-orchestrator.md      # Automated planning workflow
+│   │   ├── implementation-planner.md
+│   │   ├── plan-auditor.md
+│   │   ├── plan-refiner.md
+│   │   ├── task-orchestrator.md          # NEW: Automated implementation workflow
+│   │   ├── task-implementer.md
+│   │   ├── test-executor.md
+│   │   ├── code-auditor.md
+│   │   └── code-fixer.md
+│   └── commands/                # Slash commands
+│       ├── plan.md              # /plan - Automated planning orchestrator
+│       ├── plan-create.md       # /plan-create - Create plan only
+│       ├── plan-audit.md        # /plan-audit - Audit plan
+│       ├── plan-refine.md       # /plan-refine - Refine plan
+│       ├── implement.md         # /implement - NEW: Automated implementation workflow
+│       ├── implement-task.md    # /implement-task - Implement a task
+│       ├── test-execute.md      # /test-execute - Run tests
+│       ├── code-audit.md        # /code-audit - Audit code
+│       └── code-fix.md          # /code-fix - Fix issues
+└── README.md                    # This file
+```
+
+### Marketplace Configuration
+
+The `.claude-plugin/marketplace.json` defines the marketplace and references the plugin:
+- **Marketplace name**: `alucify-marketplace`
+- **Plugin**: `appgraph-development` (located in `./appgraph-development`)
+
+### Plugin Configuration
+
+The `appgraph-development/.claude-plugin/plugin.json` contains:
+- Plugin metadata (name, description, version, author)
+- All 9 agents are located in the `agents/` subdirectory
+- Custom slash commands are located in the `commands/` subdirectory
+
 ## Installation
+
+This repository contains a Claude Code marketplace with the `appgraph-development` plugin, which includes 9 specialized agents for AppGraph-driven development.
 
 ### Prerequisites
 
-1. **Claude Code** installed and configured
+1. **Claude Code** installed and configured (with marketplace support)
 2. **Project Structure** with required directories:
    ```
    your-project/
@@ -72,64 +135,119 @@ This repository contains 7 specialized Claude Code agents that work together to 
        └── code-generations/      # Implementation docs and reports
    ```
 
-### Installation Steps
+### Installation Methods
 
-#### Option 1: Install from Git Repository
+#### Option 1: Install from GitHub (Recommended)
+
+Add the marketplace from GitHub and install the plugin:
+
+```bash
+# In Claude Code, add the marketplace
+/plugin marketplace add your-org/alucify-agents
+
+# Install the appgraph-development plugin
+/plugin install appgraph-development@alucify-marketplace
+```
+
+Or browse and install interactively:
+```bash
+/plugin
+```
+Then select "Browse Plugins" and install `appgraph-development` from the marketplace.
+
+#### Option 2: Install from Local Directory
+
+If you've cloned the repository locally:
 
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-org/alucify-agents.git
-   cd alucify-agents
    ```
 
-2. Copy agents to your Claude Code agents directory:
+2. In Claude Code, add the local marketplace:
    ```bash
-   # For macOS/Linux
-   mkdir -p ~/.claude-code/agents/appgraph-development
-   cp -r appgraph-development/agents/* ~/.claude-code/agents/appgraph-development/
-
-   # For Windows (PowerShell)
-   New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude-code\agents\appgraph-development"
-   Copy-Item -Recurse -Force .\appgraph-development\agents\* "$env:USERPROFILE\.claude-code\agents\appgraph-development\"
+   /plugin marketplace add /path/to/alucify-agents
    ```
 
-3. Restart Claude Code or reload agents
-
-#### Option 2: Manual Installation
-
-1. Create the agents directory in your Claude Code configuration:
+3. Install the plugin:
    ```bash
-   mkdir -p ~/.claude-code/agents/appgraph-development
+   /plugin install appgraph-development@alucify-marketplace
    ```
 
-2. Copy each agent file from `appgraph-development/agents/` to `~/.claude-code/agents/appgraph-development/`
+#### Option 3: Install from Git URL
 
-3. Restart Claude Code or reload agents
+Install directly from any Git repository:
 
-#### Option 3: Project-Local Installation
+```bash
+# Add marketplace from Git URL
+/plugin marketplace add https://github.com/your-org/alucify-agents.git
 
-Install agents locally in your project:
+# Install the plugin
+/plugin install appgraph-development@alucify-marketplace
+```
 
-1. Create agents directory in your project:
+#### Option 4: Project-Local Installation
+
+Install the plugin locally in your project (useful for project-specific customizations):
+
+1. Copy the plugin to your project:
    ```bash
-   mkdir -p .claude/agents
+   mkdir -p .claude/plugins
+   cp -r /path/to/alucify-agents/appgraph-development .claude/plugins/
    ```
 
-2. Copy agent files:
-   ```bash
-   cp -r path/to/alucify-agents/appgraph-development/agents/* .claude/agents/
-   ```
+2. Claude Code will automatically discover the plugin
 
-3. Claude Code will automatically discover these agents
+### Managing the Installation
+
+View installed marketplaces:
+```bash
+/plugin marketplace list
+```
+
+Update marketplace metadata:
+```bash
+/plugin marketplace update alucify-marketplace
+```
+
+Uninstall the plugin:
+```bash
+/plugin uninstall appgraph-development
+```
+
+Remove the marketplace (this will also uninstall plugins from it):
+```bash
+/plugin marketplace remove alucify-marketplace
+```
 
 ## Verification
 
-To verify agents are installed correctly:
+To verify the plugin is installed correctly:
 
-1. Open Claude Code
-2. Type `/` to see available commands
-3. Look for the agent names in the available agents list
-4. Or use the Task tool and specify one of the agent names as `subagent_type`
+1. Check installed plugins:
+   ```bash
+   /plugin list
+   ```
+   You should see `appgraph-development` in the list.
+
+2. Verify the agents are available:
+   - Type `/` to see available commands
+   - Use the Task tool and specify one of the agent names as `subagent_type`:
+     - `planning-orchestrator` (automated planning workflow)
+     - `implementation-planner`
+     - `plan-auditor`
+     - `plan-refiner`
+     - `task-orchestrator` (NEW - automated implementation workflow)
+     - `task-implementer`
+     - `test-executor`
+     - `code-auditor`
+     - `code-fixer`
+
+3. Check marketplace status:
+   ```bash
+   /plugin marketplace list
+   ```
+   You should see `alucify-marketplace` if installed from marketplace.
 
 ## Project Setup
 
@@ -219,11 +337,66 @@ Your architecture and tech stack specification:
 
 ## Usage
 
+### Slash Commands (Quick Access)
+
+The plugin includes convenient slash commands for all agents:
+
+#### Planning Commands
+- `/plan` - **Automated planning workflow** (recommended) - Runs the complete planning → audit → refine cycle
+- `/plan-create` - Create an implementation plan only
+- `/plan-audit` - Audit an existing implementation plan
+- `/plan-refine` - Refine a plan based on audit findings
+
+#### Implementation Commands
+- `/implement` - **Automated implementation workflow** (recommended) - Runs the complete implement → test → audit → fix cycle
+- `/implement-task` - Implement a specific task only
+- `/test-execute` - Execute tests and generate test report
+- `/code-audit` - Audit implemented code for quality and compliance
+- `/code-fix` - Fix issues identified in audit and test reports
+
+**Example Usage:**
+```
+/plan
+```
+This will launch the planning orchestrator to create a complete, audit-approved implementation plan.
+
+```
+/implement
+```
+This will launch the task orchestrator to implement, test, audit, and fix a task automatically.
+
 ### Complete Development Workflow
 
 #### Phase 1: Planning
 
+**Option A: Automated Planning (Recommended)**
+
+Use the **`/plan`** command or **planning-orchestrator** agent for an automated, end-to-end planning workflow:
+
+```
+/plan
+```
+
+Or using the Task tool:
+```
+Use planning-orchestrator agent to create an audit-approved implementation plan
+```
+
+The orchestrator will automatically:
+1. Create the implementation plan (via implementation-planner)
+2. Audit the plan for completeness and alignment (via plan-auditor)
+3. Refine the plan if issues are found (via plan-refiner)
+4. Provide you with a complete, audit-approved plan ready for implementation
+
+**Option B: Manual Planning (Step-by-Step)**
+
+For more control over each step, use the individual commands or agents:
+
 1. **Create Implementation Plan**
+   ```
+   /plan-create
+   ```
+   Or using the Task tool:
    ```
    Use implementation-planner agent to create a detailed implementation plan
    ```
@@ -232,12 +405,20 @@ Your architecture and tech stack specification:
 
 2. **Audit the Plan**
    ```
+   /plan-audit
+   ```
+   Or using the Task tool:
+   ```
    Use plan-auditor agent to audit the implementation plan
    ```
    - Agent validates completeness and alignment
    - Identifies gaps and drifts
 
 3. **Refine the Plan** (if needed)
+   ```
+   /plan-refine
+   ```
+   Or using the Task tool:
    ```
    Use plan-refiner agent to address audit findings
    ```
@@ -246,7 +427,35 @@ Your architecture and tech stack specification:
 
 #### Phase 2: Implementation (for each task)
 
+**Option A: Automated Implementation (Recommended)**
+
+Use the **`/implement`** command or **task-orchestrator** agent for an automated, end-to-end implementation workflow:
+
+```
+/implement
+```
+
+Or using the Task tool:
+```
+Use task-orchestrator agent to implement Phase X, Task X.Y
+```
+
+The orchestrator will automatically:
+1. Implement the task code and tests (via task-implementer)
+2. Execute tests and collect metrics (via test-executor)
+3. Audit the implementation (via code-auditor)
+4. Fix issues if found (via code-fixer)
+5. Provide you with production-ready, audit-approved code
+
+**Option B: Manual Implementation (Step-by-Step)**
+
+For more control over each step, use the individual commands or agents:
+
 4. **Implement Task**
+   ```
+   /implement-task
+   ```
+   Or using the Task tool:
    ```
    Use task-implementer agent for Phase X, Task X.Y
    ```
@@ -256,6 +465,10 @@ Your architecture and tech stack specification:
 
 5. **Execute Tests**
    ```
+   /test-execute
+   ```
+   Or using the Task tool:
+   ```
    Use test-executor agent to run tests and collect statistics
    ```
    - Agent executes unit tests
@@ -264,6 +477,10 @@ Your architecture and tech stack specification:
 
 6. **Audit Implementation**
    ```
+   /code-audit
+   ```
+   Or using the Task tool:
+   ```
    Use code-auditor agent to audit the implementation
    ```
    - Agent reviews code quality and compliance
@@ -271,6 +488,10 @@ Your architecture and tech stack specification:
    - Generates audit report
 
 7. **Fix Issues**
+   ```
+   /code-fix
+   ```
+   Or using the Task tool:
    ```
    Use code-fixer agent to address audit and test findings
    ```
@@ -284,18 +505,49 @@ Your architecture and tech stack specification:
 
 ### Example Agent Invocations
 
+#### Using Slash Commands (Easiest)
+
+```bash
+# Phase 1: Planning
+/plan            # Automated planning workflow (RECOMMENDED)
+
+# Or manual step-by-step planning
+/plan-create     # Create implementation plan
+/plan-audit      # Audit the plan
+/plan-refine     # Refine based on audit findings
+
+# Phase 2: Implementation (for each task)
+/implement       # Automated implementation workflow (RECOMMENDED)
+
+# Or manual step-by-step implementation
+/implement-task  # Implement a specific task
+/test-execute    # Execute tests
+/code-audit      # Audit code
+/code-fix        # Fix issues
+```
+
 #### Using Task Tool in Claude Code
 
 ```typescript
-// Create implementation plan
+// Phase 1: Planning
+// Option A: Automated planning workflow (RECOMMENDED)
+task("Create an audit-approved implementation plan for user authentication feature",
+     "planning-orchestrator")
+
+// Option B: Manual step-by-step planning
 task("Create implementation plan for user authentication feature",
      "implementation-planner")
-
-// Audit the plan
 task("Audit the implementation plan for user authentication",
      "plan-auditor")
+task("Refine the implementation plan based on audit findings",
+     "plan-refiner")
 
-// Implement a specific task
+// Phase 2: Implementation (for each task)
+// Option A: Automated implementation workflow (RECOMMENDED)
+task("Implement Phase 1, Task 1.1 with automated testing, auditing, and fixing",
+     "task-orchestrator")
+
+// Option B: Manual step-by-step implementation
 task("Implement Phase 1, Task 1.1: Create authentication component",
      "task-implementer")
 
@@ -314,24 +566,91 @@ task("Fix issues identified in audit and test reports for Phase 1, Task 1.1",
 
 #### Manual Usage in Chat
 
-You can also describe what you want to accomplish, and Claude Code will automatically use the appropriate agent:
+You can also use slash commands or describe what you want to accomplish:
 
 ```
-"Please create an implementation plan for the user authentication feature
-based on the PRD and AppGraph"
+# Using slash commands
+/plan            # Planning orchestrator
+/implement       # Implementation orchestrator
+/plan-create     # Individual planning agents
+/plan-audit
+/plan-refine
+/implement-task  # Individual implementation agents
+/test-execute
+/code-audit
+/code-fix
+
+# Or describe in natural language - Claude Code will use the appropriate agent:
+
+# Planning
+"Create a complete, audit-approved implementation plan for user authentication"
+(Uses planning-orchestrator for automated workflow)
+
+"Please create an implementation plan for the user authentication feature"
+(Uses implementation-planner)
 
 "Audit the implementation plan and check for gaps"
+(Uses plan-auditor)
+
+# Implementation
+"Implement Phase 1, Task 1.1 with full testing and quality assurance"
+(Uses task-orchestrator for automated workflow)
 
 "Implement Phase 1, Task 1.1 from the implementation plan"
+(Uses task-implementer)
 
 "Run tests for the implementation and generate a report"
+(Uses test-executor)
 
 "Audit the code I just implemented for Task 1.1"
+(Uses code-auditor)
 
 "Fix all critical and high priority issues from the audit report"
+(Uses code-fixer)
 ```
 
 ## Agent Interaction Flow
+
+### Complete Automated Workflow (Recommended)
+
+```
+┌─────────────────────────────────────────────────────────┐
+│        Phase 1: Planning (Automated via /plan)           │
+├─────────────────────────────────────────────────────────┤
+│  planning-orchestrator                                   │
+│         │                                                │
+│         ├─→ 1. implementation-planner                   │
+│         │      ↓                                         │
+│         ├─→ 2. plan-auditor                             │
+│         │      ↓                                         │
+│         │   Decision: Issues Found?                     │
+│         │      ↓                                         │
+│         └─→ 3. plan-refiner (if needed)                 │
+│              ↓                                           │
+│  Output: Audit-Approved Implementation Plan             │
+└─────────────────────────────────────────────────────────┘
+                         ↓
+┌─────────────────────────────────────────────────────────┐
+│  Phase 2: Implementation (Automated via /implement)      │
+│  (Repeat for each task in the plan)                     │
+├─────────────────────────────────────────────────────────┤
+│  task-orchestrator                                       │
+│         │                                                │
+│         ├─→ 1. task-implementer                         │
+│         │      ↓                                         │
+│         ├─→ 2. test-executor                            │
+│         │      ↓                                         │
+│         ├─→ 3. code-auditor                             │
+│         │      ↓                                         │
+│         │   Decision: Issues Found?                     │
+│         │      ↓                                         │
+│         └─→ 4. code-fixer (if needed)                   │
+│              ↓                                           │
+│  Output: Production-Ready, Audit-Approved Code          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Manual Step-by-Step Workflow
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -345,7 +664,7 @@ based on the PRD and AppGraph"
 │              ↓                                           │
 │  3. plan-refiner → Refined Plan (if needed)             │
 └─────────────────────────────────────────────────────────┘
-
+                         ↓
 ┌─────────────────────────────────────────────────────────┐
 │            Implementation Phase (per task)               │
 ├─────────────────────────────────────────────────────────┤
@@ -455,10 +774,23 @@ your-project/
 
 ## Troubleshooting
 
-### Agents Not Found
-- Verify agents are in correct directory (`~/.claude-code/agents/` or `.claude/agents/`)
-- Check file extensions are `.md`
-- Restart Claude Code
+### Plugin Not Found
+- Verify the marketplace is added: `/plugin marketplace list`
+- Check if the plugin is installed: `/plugin list`
+- Try reinstalling: `/plugin install appgraph-development@alucify-marketplace`
+- Verify plugin structure has `.claude-plugin/plugin.json` file
+
+### Agents Not Available
+- Ensure the plugin is enabled: `/plugin list` (check status)
+- Verify agents directory exists in the plugin: `appgraph-development/agents/`
+- Check agent file extensions are `.md`
+- Restart Claude Code after installation
+
+### Marketplace Cannot Be Added
+- Verify the repository URL or path is correct
+- Ensure `.claude-plugin/marketplace.json` exists in repository root
+- Validate marketplace.json structure: `claude plugin validate .` (in repo directory)
+- Check network connectivity for remote repositories
 
 ### Missing Input Files
 - Ensure `.alucify/` directory exists with required files
@@ -496,6 +828,20 @@ For issues, questions, or contributions:
 - Email: [your-email]
 
 ## Version History
+
+- **v1.2.0** - Added implementation orchestration
+  - NEW: task-orchestrator agent for automated implementation workflow
+  - NEW: `/implement` slash command for streamlined task implementation
+  - Orchestrator manages task-implementer → test-executor → code-auditor → code-fixer flow
+  - Provides end-to-end automated implementation with testing, auditing, and fixing
+  - Complete automation: Use `/plan` then `/implement` for each task
+
+- **v1.1.0** - Added planning orchestration and slash commands
+  - NEW: planning-orchestrator agent for automated planning workflow
+  - NEW: 8 slash commands for quick access to all agents
+  - Orchestrator manages implementation-planner → plan-auditor → plan-refiner flow
+  - Provides streamlined, hands-off planning experience
+  - Slash commands: `/plan`, `/plan-create`, `/plan-audit`, `/plan-refine`, `/implement-task`, `/test-execute`, `/code-audit`, `/code-fix`
 
 - **v1.0.0** - Initial release with 7 agents
   - Planning agents: implementation-planner, plan-auditor, plan-refiner

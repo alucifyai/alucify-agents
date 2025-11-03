@@ -1,7 +1,7 @@
 {
     "name": "appgraph-development",
-    "description": "A plugin built for developers using Alucify's AppGraph for development.",
-    "version": "1.0.0",
+    "description": "A plugin built for developers using Alucify's AppGraph for development. Includes 9 specialized agents with automated planning and implementation orchestration.",
+    "version": "1.2.0",
     "author": {
         "name": "Chris Macomber",
         "email": "chris@alucify.ai"
