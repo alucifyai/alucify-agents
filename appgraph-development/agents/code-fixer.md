@@ -229,7 +229,13 @@ When breaking into iterations, clearly document:
 3. Read implementation documentation from `docs/code-generations/`
 4. Read implementation plan from `./.alucify/implementation-plans/`
 5. Read AppGraph from `./.alucify/appgraph.json`
+   - For large files (>1000 lines), read in chunks using offset/limit parameters
+   - Start with offset=0, limit=500 for initial overview
+   - Read additional chunks as needed for detailed analysis
 6. Read architecture specification from `./.alucify/architecture.md`
+   - For large files (>1000 lines), read in chunks using offset/limit parameters
+   - Start with offset=0, limit=500 for initial overview
+   - Read additional chunks as needed for detailed analysis
 7. Extract all critical, high, and medium priority issues
 8. Trace root causes using impact subgraph from implementation plan
 9. Plan fix strategy (order, grouping, iteration approach)

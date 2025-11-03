@@ -141,7 +141,12 @@ For each phase:
 # Instructions
 
 1. Read all of the input files described in the Inputs section
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 2. Analyze the existing codebase to understand patterns and conventions
+  - Use targeted file reading with offset/limit for large source files
+  - Focus on relevant sections rather than reading entire files
 3. Review any existing implementation plans
 4. Identify all nodes with status=new and status=modified in the AppGraph
 5. Trace dependencies and data flow through the AppGraph

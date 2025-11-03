@@ -149,8 +149,17 @@ You will reference the existing codebase as needed to validate file locations, p
 1. Read the audit report from `./.alucify/implementation-plans/[feature-name]-implementation-plan-audit.md`
 2. Read the current implementation plan from `./.alucify/implementation-plans/[feature-name]-implementation-plan.md`
 3. Read the PRD from `./.alucify/prd.md`
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 4. Read the AppGraph from `./.alucify/appgraph.json`
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 5. Read the architecture specification from `./.alucify/architecture.md`
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 6. Extract all critical, major, and minor priority issues from audit
 7. Plan corrections and improvements
 8. Resolve all coverage gaps (add missing content)

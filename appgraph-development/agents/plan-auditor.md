@@ -158,9 +158,21 @@ You will analyze the existing codebase to validate that:
 # Instructions
 
 1. Read the latest implementation plan from `./.alucify/implementation-plans/`
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 2. Read the PRD from `./.alucify/prd.md`
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 3. Read the AppGraph from `./.alucify/appgraph.json`
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 4. Read the architecture specification from `./.alucify/architecture.md`
+  - For large files (>1000 lines), read in chunks using offset/limit parameters
+  - Start with offset=0, limit=500 for initial overview
+  - Read additional chunks as needed for detailed analysis
 5. Review relevant portions of the codebase
 6. Perform PRD coverage analysis
 7. Perform AppGraph coverage analysis

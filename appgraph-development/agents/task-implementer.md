@@ -170,7 +170,13 @@ The implementation should follow these four steps for each task:
 1. **Identify the task**: Read the implementation plan and identify Phase X, Task X.Y to implement
 2. **Read task details**: Understand scope, goals, impact subgraph, tech stack, success criteria
 3. **Read AppGraph**: Examine all nodes and edges in the task's impact subgraph
+   - For large files (>1000 lines), read in chunks using offset/limit parameters
+   - Start with offset=0, limit=500 for initial overview  
+   - Read additional chunks as needed for detailed analysis
 4. **Read architecture spec**: Understand required tech stack components and patterns
+   - For large files (>1000 lines), read in chunks using offset/limit parameters  
+   - Start with offset=0, limit=500 for initial overview
+   - Read additional chunks as needed for detailed analysis
 5. **Analyze codebase**: Study existing implementations to understand patterns
 6. **Analyze tests**: Study existing test files to understand test patterns
 7. **Plan implementation**: Design approach aligned with tech stack and patterns

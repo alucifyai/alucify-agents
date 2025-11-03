@@ -229,7 +229,13 @@ You will examine the test files to:
 3. Read the implementation plan from `./.alucify/implementation-plans/`
 4. Read task details (scope, goals, impact subgraph, tech stack, success criteria)
 5. Read AppGraph from `./.alucify/appgraph.json`
+   - For large files (>1000 lines), read in chunks using offset/limit parameters
+   - Start with offset=0, limit=500 for initial overview
+   - Read additional chunks as needed for detailed analysis
 6. Read architecture specification from `./.alucify/architecture.md`
+   - For large files (>1000 lines), read in chunks using offset/limit parameters
+   - Start with offset=0, limit=500 for initial overview
+   - Read additional chunks as needed for detailed analysis
 7. Review all implemented code files
 8. Review all test files
 9. Perform implementation plan compliance check
