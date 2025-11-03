@@ -143,7 +143,7 @@ Add the marketplace from GitHub and install the plugin:
 
 ```bash
 # In Claude Code, add the marketplace
-/plugin marketplace add your-org/alucify-agents
+/plugin marketplace add alucifyai/alucify-agents
 
 # Install the appgraph-development plugin
 /plugin install appgraph-development@alucify-marketplace
@@ -161,7 +161,7 @@ If you've cloned the repository locally:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-org/alucify-agents.git
+   git clone https://github.com/alucifyai/alucify-agents.git
    ```
 
 2. In Claude Code, add the local marketplace:
@@ -180,7 +180,7 @@ Install directly from any Git repository:
 
 ```bash
 # Add marketplace from Git URL
-/plugin marketplace add https://github.com/your-org/alucify-agents.git
+/plugin marketplace add https://github.com/alucifyai/alucify-agents.git
 
 # Install the plugin
 /plugin install appgraph-development@alucify-marketplace
