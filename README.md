@@ -4,7 +4,7 @@ A comprehensive suite of specialized Claude Code agents for AppGraph-driven soft
 
 ## Overview
 
-This repository contains 6 specialized Claude Code agents that work together to implement a complete software development lifecycle based on AppGraph specifications, PRDs, and architecture documents. The agents follow a systematic approach to ensure code quality and implementation plan alignment
+This repository contains 7 specialized Claude Code agents that work together to implement a complete software development lifecycle based on AppGraph specifications, PRDs, and architecture documents. The agents follow a systematic approach to ensure code quality and implementation plan alignment
 
 ## Agents Overview
 
@@ -35,14 +35,20 @@ This repository contains 6 specialized Claude Code agents that work together to 
    - Follows 4-step process: Analysis → Implementation → Testing → Validation
    - Generates production code and comprehensive unit tests
    - Output: Code files, test files, and validation report
+  
+5. **test-executor**
+   - Executes unit tests for implemented tasks
+   - Collects comprehensive test statistics and coverage metrics
+   - Analyzes test failures and performance
+   - Output: `docs/code-generations/[task-id]-test-report.md`
 
-5. **code-auditor**
+6. **code-auditor**
    - Audits implemented code for compliance and quality
    - Validates implementation plan alignment, code quality, test coverage
    - Detects unrequired functionality and scope drift
    - Output: `docs/code-generations/[task-id]-implementation-audit.md`
 
-6. **code-fixer** 
+7. **code-fixer** 
    - Fixes issues identified in audit and test reports
    - Traces root causes via AppGraph impact subgraph
    - Addresses critical, high, and medium priority issues iteratively
@@ -63,6 +69,7 @@ alucify-agents/
 │   │   ├── plan-auditor.md
 │   │   ├── plan-refiner.md
 │   │   ├── task-implementer.md
+│   │   ├── test-executor.md
 │   │   ├── code-auditor.md
 │   │   └── code-fixer.md
 └── README.md                    # This file
@@ -256,7 +263,15 @@ Your architecture and tech stack specification:
    - Run tests
    - Generates validation report
 
-5. **Audit Implementation**
+5. **Execute Tests**
+   ```
+   Use test-executor agent to run tests and collect statistics
+   ```
+   - Agent executes unit tests
+   - Collects coverage metrics
+   - Generates test report
+
+6. **Audit Implementation**
    ```
    Use code-auditor agent to audit the implementation
    ```
@@ -264,7 +279,7 @@ Your architecture and tech stack specification:
    - Identifies gaps, drifts, and issues
    - Generates audit report
 
-6. **Fix Issues**
+7. **Fix Issues**
    ```
    Use code-fixer agent to address audit and test findings
    ```
@@ -341,9 +356,11 @@ based on the PRD and AppGraph"
 ├─────────────────────────────────────────────────────────┤
 │  4. task-implementer → Code + Tests                     │
 │              ↓                                           │
-│  5. code-auditor → Audit Report                         │
+│  5. test-executor → Test Report                         │
 │              ↓                                           │
-│  6. code-fixer → Fixed Code + Gap Resolution Report     │
+│  6. code-auditor → Audit Report                         │
+│              ↓                                           │
+│  7. code-fixer → Fixed Code + Gap Resolution Report     │
 │              ↓                                           │
 │  ┌───────────────────────┐                              │
 │  │ Issues remaining?     │                              │
