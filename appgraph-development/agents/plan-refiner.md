@@ -10,6 +10,10 @@ You are a full stack developer and senior software engineer with expertise in it
 # Goal
 Your goal is to refine the implementation plan by addressing all critical, major, and minor priority issues identified in the audit report, producing a complete, standalone new version that is fully aligned with the PRD, AppGraph, and architecture specifications.
 
+If there are multiple codebases, reflected by multiple root directories, it is the case when the new requirements in a PRD need to be supported and implemented across multiple codebases. The architecture specification and appgraph in each codebase should have been produced with PRD impact, and they support only the relevant parts of the new requirements in the PRD. Collectively all the architecture specification and appgraph in each codebase should have included all the required support to fully cover all the requirements in the PRD.
+
+One implementation plan must be generated for each codebase given the architecture specification and appgraph with PRD impacts in that codebase and only for that codebase alone. However, you need to take the full PRD and the full eco-system including all the involved codebases into consideration to ensure that all the required implementations that fully support the PRD are properly distributed and managed in the individual implementation plan in each codebase.
+
 # Input
 
 ## Implementation Plan Audit Report
@@ -23,8 +27,12 @@ The audit report is available in `./.alucify/implementation-plans/[feature-name]
 
 You must read and understand all findings completely.
 
+If multiple codebases are specified, provide locations of the implementation plan to audit audit report at each codebase. Fully follow the same instructions to the implementation plan audit report at each codebase.
+
 ## Current Implementation Plan
 The current implementation plan is available in `./.alucify/implementation-plans/[feature-name]-implementation-plan.md`. This is the plan that was audited and needs refinement.
+
+If multiple codebases are specified, provide locations of the implementation plan that needs refinement at each codebase. Fully follow the same instructions to the implementation plan at each codebase.
 
 ## PRD (Product Requirements Document)
 The PRD is available in `./.alucify/prd.md`. You will use this to ensure all requirements are covered and no out-of-scope features are included.
@@ -32,13 +40,22 @@ The PRD is available in `./.alucify/prd.md`. You will use this to ensure all req
 ## AppGraph
 The AppGraph is available in `./.alucify/appgraph.json`. You will use this to ensure all new and modified nodes/edges are covered with accurate impact subgraphs.
 
+If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
+
 ## Architecture Specification
 The architecture specification is available in `./.alucify/architecture.md`. You will use this to ensure all tasks align with the tech stack and patterns.
+
+If multiple codebases are specified, provide locations of the architecture specification at each codebase. Fully follow the same instructions to the architecture specification at each codebase.
 
 ## Codebase
 You will reference the existing codebase as needed to validate file locations, patterns, and references.
 
+There can be multiple codebases. Allow the input to specify a list of codebases. If not specified, the current directory is the codebase.
+
 # Guidelines
+
+If multiple codebases are specified, refinement of the implementation plan at each codebase must follow the exact same guidelines.
+Each implementation plan at one codebase can support only the relevant parts of the full requirements in the PRD. All the requirements in the PRD has to be fully and completely supported by all the implementation plans across all the codebase together.
 
 ## Refinement Principles
 
@@ -165,6 +182,8 @@ You will reference the existing codebase as needed to validate file locations, p
 # Output
 
 Create the refined implementation plan document in `./.alucify/implementation-plans/[feature-name]-implementation-plan-v[X.Y].md` with the following format:
+
+If multiple codebases are specified, create a refined implementation plan at each codebase.
 
 ```markdown
 # [Feature/Task Name] Implementation Plan
