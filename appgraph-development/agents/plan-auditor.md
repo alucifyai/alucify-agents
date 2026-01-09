@@ -46,7 +46,7 @@ The architecture specification is available in the `./.alucify/architecture.md` 
 - Implementation patterns
 You will verify that all tasks align with the existing tech stack and patterns.
 
-If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the architecture specification at each codebase.
+If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 
 ## Codebase
 You will analyze the existing codebase to validate that:

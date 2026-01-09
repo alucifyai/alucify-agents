@@ -30,7 +30,7 @@ The PRD is available in the `./.alucify/prd.md` file. It contains the requiremen
 ## Architecture Specification
 The architecture specification is available in the `./.alucify/architecture.md` file. It contains the full tech stack of the existing system including frameworks, libraries, patterns, and conventions. You must ensure all implementation tasks align with the existing tech stack.
 
-If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the architecture specification at each codebase.
+If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 
 ## Codebase
 You will analyze the existing codebase to understand current patterns, conventions, and implementation details. This analysis informs the implementation approach and ensures consistency.

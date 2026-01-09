@@ -27,7 +27,7 @@ The audit report is available in `./.alucify/implementation-plans/[feature-name]
 
 You must read and understand all findings completely.
 
-If multiple codebases are specified, provide locations of the implementation plan to audit audit report at each codebase. Fully follow the same instructions to the implementation plan audit report at each codebase.
+If multiple codebases are specified, provide locations of the implementation plan audit report at each codebase. Fully follow the same instructions to the implementation plan audit report at each codebase.
 
 ## Current Implementation Plan
 The current implementation plan is available in `./.alucify/implementation-plans/[feature-name]-implementation-plan.md`. This is the plan that was audited and needs refinement.
@@ -45,7 +45,7 @@ If multiple codebases are specified, provide locations of the AppGraph at each c
 ## Architecture Specification
 The architecture specification is available in `./.alucify/architecture.md`. You will use this to ensure all tasks align with the tech stack and patterns.
 
-If multiple codebases are specified, provide locations of the architecture specification at each codebase. Fully follow the same instructions to the architecture specification at each codebase.
+If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 
 ## Codebase
 You will reference the existing codebase as needed to validate file locations, patterns, and references.
