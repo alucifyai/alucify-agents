@@ -22,13 +22,19 @@ The AppGraph is available in the `./.alucify/appgraph-project.json` file. It con
 - **Modified nodes and edges** (status = modified): Existing components that need changes
 You must read and analyze the complete AppGraph to understand lineage, dependencies, and impact across interface, logic, and data layers.
 
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
+
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
 ## PRD (Product Requirements Document)
 The PRD is available in the `./.alucify/artifacts/prd.md` file. It contains the requirements and objectives for the new feature. You must ensure your implementation plan includes ONLY features and tasks specified in the PRD - no additional features should be included.
 
+**Fallback**: If `./.alucify/artifacts/prd.md` is not found, check for `./.alucify/prd.md` (legacy path).
+
 ## Architecture Specification
 The architecture specification is available in the `./.alucify/artifacts/architecture.md` file. It contains the full tech stack of the existing system including frameworks, libraries, patterns, and conventions. You must ensure all implementation tasks align with the existing tech stack.
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 
@@ -39,6 +45,8 @@ There can be multiple codebases. Allow the input to specify a list of codebases.
 
 ## Agent Artifacts
 You will read any existing implementation plans in `./.alucify/plans/` to avoid duplicating work and maintain consistency across features.
+
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
 
 If multiple codebases are specified, fully follow the same instructions at each codebase.
 

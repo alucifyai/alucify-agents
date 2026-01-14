@@ -29,6 +29,8 @@ The implementation plan is available in `./.alucify/plans/` directory. Read the 
 - Success criteria
 - Required functionality
 
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
+
 You will verify that the code implementation matches the plan specifications.
 
 ## AppGraph
@@ -37,6 +39,8 @@ The AppGraph is available in `./.alucify/appgraph-project.json`. It contains:
 - Nodes with status=modified (components to be changed)
 - Edges (relationships between components)
 - Node properties and specifications
+
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
 
 You will verify that the implementation accurately reflects the impact subgraph.
 
@@ -47,6 +51,8 @@ The architecture specification is available in `./.alucify/artifacts/architectur
 - System architecture
 - Implementation patterns
 - Coding standards
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 You will verify that the code follows the specified tech stack and patterns.
 

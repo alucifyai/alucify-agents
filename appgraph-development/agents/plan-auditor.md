@@ -19,6 +19,8 @@ One implementation plan must be generated for each codebase given the architectu
 ## Implementation Plan
 The implementation plan to audit is available in `./.alucify/plans/` directory. Read the latest version of the implementation plan document.
 
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
+
 If multiple codebases are specified, provide locations of the implementation plan to audit at each codebase. Fully follow the same instructions to the implementation plan at each codebase.
 
 ## PRD (Product Requirements Document)
@@ -29,12 +31,16 @@ The PRD is available in the `./.alucify/artifacts/prd.md` file. It contains:
 - Success metrics
 You will verify that all requirements are covered in the implementation plan.
 
+**Fallback**: If `./.alucify/artifacts/prd.md` is not found, check for `./.alucify/prd.md` (legacy path).
+
 ## AppGraph
 The AppGraph is available in the `./.alucify/appgraph-project.json` file. It contains:
 - Nodes with status=new (components to be created)
 - Nodes with status=modified (components to be changed)
 - Edges (relationships between components)
 You will verify that the impact subgraphs in the implementation plan accurately reflect the AppGraph.
+
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
 
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
@@ -45,6 +51,8 @@ The architecture specification is available in the `./.alucify/artifacts/archite
 - System architecture
 - Implementation patterns
 You will verify that all tasks align with the existing tech stack and patterns.
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 

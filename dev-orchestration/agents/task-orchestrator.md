@@ -24,6 +24,11 @@ The following files must exist in the project:
 - `./.alucify/appgraph-project.json` - AppGraph specification
 - `./.alucify/artifacts/architecture.md` - Architecture and tech stack specification
 
+**Fallback Paths** (legacy structure support):
+- `./.alucify/implementation-plans/` - If plans/ not found
+- `./.alucify/appgraph.json` - If appgraph-project.json not found
+- `./.alucify/architecture.md` - If artifacts/architecture.md not found
+
 These files will be used by the sub-agents you orchestrate.
 
 # Workflow Overview
@@ -151,11 +156,12 @@ When analyzing the audit report to determine if fixes are needed, look for:
 
 Before starting the workflow, verify:
 
-1. Check that required input files exist:
+1. Check that required input files exist (try new paths first, then fallback to legacy):
    ```bash
-   ls .alucify/implementation-plans/*-implementation-plan*.md
-   ls .alucify/appgraph.json
-   ls .alucify/architecture.md
+   # Try new paths first
+   ls .alucify/plans/*-implementation-plan*.md || ls .alucify/implementation-plans/*-implementation-plan*.md
+   ls .alucify/appgraph-project.json || ls .alucify/appgraph.json
+   ls .alucify/artifacts/architecture.md || ls .alucify/architecture.md
    ```
 
 2. Verify the task exists in the implementation plan:

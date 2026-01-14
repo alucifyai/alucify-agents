@@ -24,6 +24,12 @@ The following files must exist in the project:
 - `./.alucify/appgraph-project.json` - AppGraph specification
 - `./.alucify/artifacts/architecture.md` - Architecture and tech stack specification
 
+**Fallback Paths** (legacy structure support):
+- `./.alucify/prd.md` - If artifacts/prd.md not found
+- `./.alucify/appgraph.json` - If appgraph-project.json not found
+- `./.alucify/architecture.md` - If artifacts/architecture.md not found
+- `./.alucify/implementation-plans/` - If plans/ not found
+
 These files will be used by the sub-agents you orchestrate.
 
 # Workflow Overview
@@ -133,11 +139,12 @@ When analyzing the audit report to determine if refinement is needed, look for:
 
 Before starting the workflow, verify:
 
-1. Check that required input files exist:
+1. Check that required input files exist (try new paths first, then fallback to legacy):
    ```bash
-   ls .alucify/prd.md
-   ls .alucify/appgraph.json
-   ls .alucify/architecture.md
+   # Try new paths first
+   ls .alucify/artifacts/prd.md || ls .alucify/prd.md
+   ls .alucify/appgraph-project.json || ls .alucify/appgraph.json
+   ls .alucify/artifacts/architecture.md || ls .alucify/architecture.md
    ```
 
 2. Create output directory if needed:

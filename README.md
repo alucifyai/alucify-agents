@@ -118,6 +118,17 @@ This repository contains a Claude Code marketplace with the `appgraph-developmen
        └── code-generations/      # Implementation docs and reports
    ```
 
+   **Legacy Structure Support**: The agents also support the older folder structure for backward compatibility:
+   ```
+   your-project/
+   ├── .alucify/
+   │   ├── appgraph.json              # Legacy AppGraph path
+   │   ├── prd.md                     # Legacy PRD path
+   │   ├── architecture.md            # Legacy architecture path
+   │   └── implementation-plans/      # Legacy plans folder
+   ```
+   Agents will automatically fall back to legacy paths if the new paths are not found.
+
 ### Installation Methods
 
 #### Option 1: Install from GitHub (Recommended)

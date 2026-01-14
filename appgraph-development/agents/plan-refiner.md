@@ -27,23 +27,33 @@ The audit report is available in `./.alucify/plans/[feature-name]-implementation
 
 You must read and understand all findings completely.
 
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
+
 If multiple codebases are specified, provide locations of the implementation plan audit report at each codebase. Fully follow the same instructions to the implementation plan audit report at each codebase.
 
 ## Current Implementation Plan
 The current implementation plan is available in `./.alucify/plans/[feature-name]-implementation-plan.md`. This is the plan that was audited and needs refinement.
+
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
 
 If multiple codebases are specified, provide locations of the implementation plan that needs refinement at each codebase. Fully follow the same instructions to the implementation plan at each codebase.
 
 ## PRD (Product Requirements Document)
 The PRD is available in `./.alucify/artifacts/prd.md`. You will use this to ensure all requirements are covered and no out-of-scope features are included.
 
+**Fallback**: If `./.alucify/artifacts/prd.md` is not found, check for `./.alucify/prd.md` (legacy path).
+
 ## AppGraph
 The AppGraph is available in `./.alucify/appgraph-project.json`. You will use this to ensure all new and modified nodes/edges are covered with accurate impact subgraphs.
+
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
 
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
 ## Architecture Specification
 The architecture specification is available in `./.alucify/artifacts/architecture.md`. You will use this to ensure all tasks align with the tech stack and patterns.
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 

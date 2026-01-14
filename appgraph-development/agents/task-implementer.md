@@ -21,6 +21,8 @@ The implementation plan is available in `./.alucify/plans/` directory. Read the 
 - Architecture & tech stack specifications
 - Success criteria to validate completion
 
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
+
 You must identify which phase and task (e.g., Phase X, Task X.Y) you are implementing.
 
 ## Task Specification
@@ -37,12 +39,16 @@ The AppGraph is available in `./.alucify/appgraph-project.json`. You will:
 - Trace dependencies and data flow
 - Ensure implementation matches AppGraph specifications
 
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
+
 ## Architecture Specification
 The architecture specification is available in `./.alucify/artifacts/architecture.md`. You will:
 - Use the specified tech stack (frameworks, libraries)
 - Follow the specified design patterns
 - Adhere to coding conventions and standards
 - Place files in the correct locations
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 ## Codebase
 You will thoroughly analyze the existing codebase to:
