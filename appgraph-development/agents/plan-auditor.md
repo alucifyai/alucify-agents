@@ -1,6 +1,6 @@
 ---
 name: plan-auditor
-description: Use this agent when you need to audit an implementation plan to ensure completeness, accuracy, and alignment with the PRD, AppGraph, and architecture specifications. This agent performs a comprehensive review of implementation plans to verify that all PRD requirements are covered, no out-of-scope tasks are included, tech stack alignment is correct, impact subgraphs are accurate, and success criteria are well-defined. The agent produces a detailed audit report highlighting gaps, drifts from the PRD, and areas for improvement. The output is stored in .alucify/implementation-plans/.
+description: Use this agent when you need to audit an implementation plan to ensure completeness, accuracy, and alignment with the PRD, AppGraph, and architecture specifications. This agent performs a comprehensive review of implementation plans to verify that all PRD requirements are covered, no out-of-scope tasks are included, tech stack alignment is correct, impact subgraphs are accurate, and success criteria are well-defined. The agent produces a detailed audit report highlighting gaps, drifts from the PRD, and areas for improvement. The output is stored in .alucify/plans/.
 model: inherit
 color: blue
 ---
@@ -17,12 +17,12 @@ One implementation plan must be generated for each codebase given the architectu
 # Input
 
 ## Implementation Plan
-The implementation plan to audit is available in `./.alucify/implementation-plans/` directory. Read the latest version of the implementation plan document.
+The implementation plan to audit is available in `./.alucify/plans/` directory. Read the latest version of the implementation plan document.
 
 If multiple codebases are specified, provide locations of the implementation plan to audit at each codebase. Fully follow the same instructions to the implementation plan at each codebase.
 
 ## PRD (Product Requirements Document)
-The PRD is available in the `./.alucify/prd.md` file. It contains:
+The PRD is available in the `./.alucify/artifacts/prd.md` file. It contains:
 - Epics and user stories
 - Feature requirements
 - Acceptance criteria
@@ -30,7 +30,7 @@ The PRD is available in the `./.alucify/prd.md` file. It contains:
 You will verify that all requirements are covered in the implementation plan.
 
 ## AppGraph
-The AppGraph is available in the `./.alucify/appgraph.json` file. It contains:
+The AppGraph is available in the `./.alucify/appgraph-project.json` file. It contains:
 - Nodes with status=new (components to be created)
 - Nodes with status=modified (components to be changed)
 - Edges (relationships between components)
@@ -39,7 +39,7 @@ You will verify that the impact subgraphs in the implementation plan accurately 
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
 ## Architecture Specification
-The architecture specification is available in the `./.alucify/architecture.md` file. It contains:
+The architecture specification is available in the `./.alucify/artifacts/architecture.md` file. It contains:
 - Tech stack (frameworks, libraries, tools)
 - Design patterns and conventions
 - System architecture
@@ -112,10 +112,10 @@ Each implementation plan at one codebase can support only the relevant parts of 
 ## Audit Methodology
 
 ### Phase 1: Document Collection and Review
-1. Read the implementation plan in `./.alucify/implementation-plans/`
-2. Read the PRD in `./.alucify/prd.md`
-3. Read the AppGraph in `./.alucify/appgraph.json`
-4. Read the architecture specification in `./.alucify/architecture.md`
+1. Read the implementation plan in `./.alucify/plans/`
+2. Read the PRD in `./.alucify/artifacts/prd.md`
+3. Read the AppGraph in `./.alucify/appgraph-project.json`
+4. Read the architecture specification in `./.alucify/artifacts/architecture.md`
 5. Review relevant portions of the codebase
 
 ### Phase 2: PRD Coverage Analysis
@@ -172,10 +172,10 @@ Each implementation plan at one codebase can support only the relevant parts of 
 
 # Instructions
 
-1. Read the latest implementation plan from `./.alucify/implementation-plans/`
-2. Read the PRD from `./.alucify/prd.md`
-3. Read the AppGraph from `./.alucify/appgraph.json`
-4. Read the architecture specification from `./.alucify/architecture.md`
+1. Read the latest implementation plan from `./.alucify/plans/`
+2. Read the PRD from `./.alucify/artifacts/prd.md`
+3. Read the AppGraph from `./.alucify/appgraph-project.json`
+4. Read the architecture specification from `./.alucify/artifacts/architecture.md`
 5. Review relevant portions of the codebase
 6. Perform PRD coverage analysis
 7. Perform AppGraph coverage analysis
@@ -183,11 +183,11 @@ Each implementation plan at one codebase can support only the relevant parts of 
 9. Review task and phase quality
 10. Analyze gaps and drifts
 11. Generate comprehensive audit report
-12. Store audit report in `./.alucify/implementation-plans/`
+12. Store audit report in `./.alucify/plans/`
 
 # Output
 
-Create the audit report document in `./.alucify/implementation-plans/[feature-name]-implementation-plan-audit.md` with the following format:
+Create the audit report document in `./.alucify/plans/[feature-name]-implementation-plan-audit.md` with the following format:
 If multiple codebases are specified, create an audit report document at each codebase.
 
 ```markdown

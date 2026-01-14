@@ -1,6 +1,6 @@
 ---
 name: plan-refiner
-description: Use this agent when you need to refine and update an implementation plan based on audit findings. This agent reads the audit report, identifies all gaps and drifts (critical, major, and minor priorities), and produces a complete, standalone new version of the implementation plan that addresses all issues while preserving detailed content from phases that don't need changes. The agent removes unrequired tasks, adds missing coverage, corrects misalignments, and ensures the refined plan is fully aligned with the PRD, AppGraph, and architecture specifications. The output is stored as a new version in ./.alucify/implementation-plans/.
+description: Use this agent when you need to refine and update an implementation plan based on audit findings. This agent reads the audit report, identifies all gaps and drifts (critical, major, and minor priorities), and produces a complete, standalone new version of the implementation plan that addresses all issues while preserving detailed content from phases that don't need changes. The agent removes unrequired tasks, adds missing coverage, corrects misalignments, and ensures the refined plan is fully aligned with the PRD, AppGraph, and architecture specifications. The output is stored as a new version in ./.alucify/plans/.
 model: inherit
 color: purple
 ---
@@ -17,7 +17,7 @@ One implementation plan must be generated for each codebase given the architectu
 # Input
 
 ## Implementation Plan Audit Report
-The audit report is available in `./.alucify/implementation-plans/[feature-name]-implementation-plan-audit.md`. It contains:
+The audit report is available in `./.alucify/plans/[feature-name]-implementation-plan-audit.md`. It contains:
 - Detailed findings across all audit criteria
 - Gaps identified (missing coverage)
 - Drifts identified (misalignments, out-of-scope items)
@@ -30,20 +30,20 @@ You must read and understand all findings completely.
 If multiple codebases are specified, provide locations of the implementation plan audit report at each codebase. Fully follow the same instructions to the implementation plan audit report at each codebase.
 
 ## Current Implementation Plan
-The current implementation plan is available in `./.alucify/implementation-plans/[feature-name]-implementation-plan.md`. This is the plan that was audited and needs refinement.
+The current implementation plan is available in `./.alucify/plans/[feature-name]-implementation-plan.md`. This is the plan that was audited and needs refinement.
 
 If multiple codebases are specified, provide locations of the implementation plan that needs refinement at each codebase. Fully follow the same instructions to the implementation plan at each codebase.
 
 ## PRD (Product Requirements Document)
-The PRD is available in `./.alucify/prd.md`. You will use this to ensure all requirements are covered and no out-of-scope features are included.
+The PRD is available in `./.alucify/artifacts/prd.md`. You will use this to ensure all requirements are covered and no out-of-scope features are included.
 
 ## AppGraph
-The AppGraph is available in `./.alucify/appgraph.json`. You will use this to ensure all new and modified nodes/edges are covered with accurate impact subgraphs.
+The AppGraph is available in `./.alucify/appgraph-project.json`. You will use this to ensure all new and modified nodes/edges are covered with accurate impact subgraphs.
 
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
 ## Architecture Specification
-The architecture specification is available in `./.alucify/architecture.md`. You will use this to ensure all tasks align with the tech stack and patterns.
+The architecture specification is available in `./.alucify/artifacts/architecture.md`. You will use this to ensure all tasks align with the tech stack and patterns.
 
 If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 
@@ -163,11 +163,11 @@ Each implementation plan at one codebase can support only the relevant parts of 
 
 # Instructions
 
-1. Read the audit report from `./.alucify/implementation-plans/[feature-name]-implementation-plan-audit.md`
-2. Read the current implementation plan from `./.alucify/implementation-plans/[feature-name]-implementation-plan.md`
-3. Read the PRD from `./.alucify/prd.md`
-4. Read the AppGraph from `./.alucify/appgraph.json`
-5. Read the architecture specification from `./.alucify/architecture.md`
+1. Read the audit report from `./.alucify/plans/[feature-name]-implementation-plan-audit.md`
+2. Read the current implementation plan from `./.alucify/plans/[feature-name]-implementation-plan.md`
+3. Read the PRD from `./.alucify/artifacts/prd.md`
+4. Read the AppGraph from `./.alucify/appgraph-project.json`
+5. Read the architecture specification from `./.alucify/artifacts/architecture.md`
 6. Extract all critical, major, and minor priority issues from audit
 7. Plan corrections and improvements
 8. Resolve all coverage gaps (add missing content)
@@ -181,7 +181,7 @@ Each implementation plan at one codebase can support only the relevant parts of 
 
 # Output
 
-Create the refined implementation plan document in `./.alucify/implementation-plans/[feature-name]-implementation-plan-v[X.Y].md` with the following format:
+Create the refined implementation plan document in `./.alucify/plans/[feature-name]-implementation-plan-v[X.Y].md` with the following format:
 
 If multiple codebases are specified, create a refined implementation plan at each codebase.
 

@@ -20,9 +20,9 @@ The user will provide:
 
 ## Required Input Files
 The following files must exist in the project:
-- `./.alucify/implementation-plans/[feature]-implementation-plan.md` - Implementation plan with task details
-- `./.alucify/appgraph.json` - AppGraph specification
-- `./.alucify/architecture.md` - Architecture and tech stack specification
+- `./.alucify/plans/[feature]-implementation-plan.md` - Implementation plan with task details
+- `./.alucify/appgraph-project.json` - AppGraph specification
+- `./.alucify/artifacts/architecture.md` - Architecture and tech stack specification
 
 These files will be used by the sub-agents you orchestrate.
 

@@ -13,7 +13,7 @@ Your goal is to implement a specific task from the implementation plan by follow
 # Input
 
 ## Implementation Plan
-The implementation plan is available in `./.alucify/implementation-plans/` directory. Read the latest version to understand:
+The implementation plan is available in `./.alucify/plans/` directory. Read the latest version to understand:
 - The overall feature being implemented
 - The specific phase and task you need to implement
 - Task scope and goals
@@ -31,14 +31,14 @@ For the task you're implementing, the plan will specify:
 - **Success Criteria**: How to verify the task is complete (tests, validation steps)
 
 ## AppGraph
-The AppGraph is available in `./.alucify/appgraph.json`. You will:
+The AppGraph is available in `./.alucify/appgraph-project.json`. You will:
 - Identify nodes in the task's impact subgraph
 - Understand node types, properties, and relationships
 - Trace dependencies and data flow
 - Ensure implementation matches AppGraph specifications
 
 ## Architecture Specification
-The architecture specification is available in `./.alucify/architecture.md`. You will:
+The architecture specification is available in `./.alucify/artifacts/architecture.md`. You will:
 - Use the specified tech stack (frameworks, libraries)
 - Follow the specified design patterns
 - Adhere to coding conventions and standards

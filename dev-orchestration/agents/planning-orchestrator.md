@@ -20,9 +20,9 @@ The user will provide context about the feature to be planned. This may include:
 
 ## Required Input Files
 The following files must exist in the project:
-- `./.alucify/prd.md` - Product Requirements Document
-- `./.alucify/appgraph.json` - AppGraph specification
-- `./.alucify/architecture.md` - Architecture and tech stack specification
+- `./.alucify/artifacts/prd.md` - Product Requirements Document
+- `./.alucify/appgraph-project.json` - AppGraph specification
+- `./.alucify/artifacts/architecture.md` - Architecture and tech stack specification
 
 These files will be used by the sub-agents you orchestrate.
 
@@ -45,13 +45,13 @@ Step 3: Decision Point
 Execute the `implementation-planner` agent to create the initial implementation plan.
 
 **Input**: PRD, AppGraph, Architecture spec, Codebase
-**Output**: Implementation plan document in `./.alucify/implementation-plans/[feature]-implementation-plan.md`
+**Output**: Implementation plan document in `./.alucify/plans/[feature]-implementation-plan.md`
 
 ## Step 2: Audit Implementation Plan
 Execute the `plan-auditor` agent to audit the implementation plan for completeness and alignment.
 
 **Input**: Implementation plan, PRD, AppGraph, Architecture spec
-**Output**: Audit report in `./.alucify/implementation-plans/[feature]-implementation-plan-audit.md`
+**Output**: Audit report in `./.alucify/plans/[feature]-implementation-plan-audit.md`
 
 ## Step 3: Conditional Refinement
 Analyze the audit report to determine if issues were found:
@@ -60,7 +60,7 @@ Analyze the audit report to determine if issues were found:
 Execute the `plan-refiner` agent to produce a refined version of the implementation plan.
 
 **Input**: Audit report, Current implementation plan, PRD, AppGraph, Architecture spec
-**Output**: Refined implementation plan in `./.alucify/implementation-plans/[feature]-implementation-plan-v1.1.md`
+**Output**: Refined implementation plan in `./.alucify/plans/[feature]-implementation-plan-v1.1.md`
 
 ### If Only Minor Issues or No Issues:
 Planning is complete. The current implementation plan is ready for use.
@@ -142,7 +142,7 @@ Before starting the workflow, verify:
 
 2. Create output directory if needed:
    ```bash
-   mkdir -p .alucify/implementation-plans
+   mkdir -p .alucify/plans
    ```
 
 3. Inform the user about the workflow that will be executed
@@ -164,7 +164,7 @@ Before starting the workflow, verify:
 
 4. Verify the output file exists:
    ```bash
-   ls .alucify/implementation-plans/*-implementation-plan.md
+   ls .alucify/plans/*-implementation-plan.md
    ```
 
 5. Inform the user of the outcome and file location
@@ -184,7 +184,7 @@ Before starting the workflow, verify:
 
 4. Verify the output file exists:
    ```bash
-   ls .alucify/implementation-plans/*-implementation-plan-audit.md
+   ls .alucify/plans/*-implementation-plan-audit.md
    ```
 
 5. Read the audit report to analyze findings
@@ -225,7 +225,7 @@ If refinement is triggered:
 
 4. Verify the output file exists:
    ```bash
-   ls .alucify/implementation-plans/*-implementation-plan-v*.md
+   ls .alucify/plans/*-implementation-plan-v*.md
    ```
 
 5. Inform the user of the outcome and refined plan location
@@ -243,9 +243,9 @@ Provide a comprehensive summary:
 - ✅ Step 3: Plan refined (if applicable)
 
 ## Outputs Created
-1. Implementation Plan: `.alucify/implementation-plans/[feature]-implementation-plan.md`
-2. Audit Report: `.alucify/implementation-plans/[feature]-implementation-plan-audit.md`
-3. Refined Plan (if applicable): `.alucify/implementation-plans/[feature]-implementation-plan-v1.1.md`
+1. Implementation Plan: `.alucify/plans/[feature]-implementation-plan.md`
+2. Audit Report: `.alucify/plans/[feature]-implementation-plan-audit.md`
+3. Refined Plan (if applicable): `.alucify/plans/[feature]-implementation-plan-v1.1.md`
 
 ## Audit Summary
 - Critical Issues: [count]

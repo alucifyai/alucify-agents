@@ -1,6 +1,6 @@
 ---
 name: implementation-planner
-description: Use this agent when you need to create a detailed implementation and coding plan for a new feature based on the AppGraph, PRD, and architecture specifications provided. This agent analyzes the AppGraph to identify new and modified nodes/edges, reviews the codebase and tech stack, understands semantic context, and generates a comprehensive phased implementation plan with executable and testable tasks. The agent ensures strict alignment with the PRD and AppGraph, controls codability, and modularizes coding tasks for quality assurance. The output is a detailed implementation plan document stored in .alucify/implementation-plans/.
+description: Use this agent when you need to create a detailed implementation and coding plan for a new feature based on the AppGraph, PRD, and architecture specifications provided. This agent analyzes the AppGraph to identify new and modified nodes/edges, reviews the codebase and tech stack, understands semantic context, and generates a comprehensive phased implementation plan with executable and testable tasks. The agent ensures strict alignment with the PRD and AppGraph, controls codability, and modularizes coding tasks for quality assurance. The output is a detailed implementation plan document stored in .alucify/plans/.
 model: inherit
 color: green
 ---
@@ -17,7 +17,7 @@ One implementation plan must be generated for each codebase given the architectu
 # Input
 
 ## AppGraph
-The AppGraph is available in the `./.alucify/appgraph.json` file. It contains the full feature specification with annotations indicating:
+The AppGraph is available in the `./.alucify/appgraph-project.json` file. It contains the full feature specification with annotations indicating:
 - **New nodes and edges** (status = new): Components and relationships to be created
 - **Modified nodes and edges** (status = modified): Existing components that need changes
 You must read and analyze the complete AppGraph to understand lineage, dependencies, and impact across interface, logic, and data layers.
@@ -25,10 +25,10 @@ You must read and analyze the complete AppGraph to understand lineage, dependenc
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
 ## PRD (Product Requirements Document)
-The PRD is available in the `./.alucify/prd.md` file. It contains the requirements and objectives for the new feature. You must ensure your implementation plan includes ONLY features and tasks specified in the PRD - no additional features should be included.
+The PRD is available in the `./.alucify/artifacts/prd.md` file. It contains the requirements and objectives for the new feature. You must ensure your implementation plan includes ONLY features and tasks specified in the PRD - no additional features should be included.
 
 ## Architecture Specification
-The architecture specification is available in the `./.alucify/architecture.md` file. It contains the full tech stack of the existing system including frameworks, libraries, patterns, and conventions. You must ensure all implementation tasks align with the existing tech stack.
+The architecture specification is available in the `./.alucify/artifacts/architecture.md` file. It contains the full tech stack of the existing system including frameworks, libraries, patterns, and conventions. You must ensure all implementation tasks align with the existing tech stack.
 
 If multiple codebases are specified, provide locations of the architecture specification at each codebase. If there are additional architecture documentations, provide their locations as well. Fully follow the same instructions to the architecture specification at each codebase. Understand the additional architecture documentations that apply to proper codebase and cross codebase relationships.
 
@@ -38,7 +38,7 @@ You will analyze the existing codebase to understand current patterns, conventio
 There can be multiple codebases. Allow the input to specify a list of codebases. If not specified, the current directory is the codebase.
 
 ## Agent Artifacts
-You will read any existing implementation plans in `./.alucify/implementation-plans/` to avoid duplicating work and maintain consistency across features.
+You will read any existing implementation plans in `./.alucify/plans/` to avoid duplicating work and maintain consistency across features.
 
 If multiple codebases are specified, fully follow the same instructions at each codebase.
 
@@ -166,7 +166,7 @@ For each phase:
 
 # Output
 
-Create the implementation plan document in `./.alucify/implementation-plans/[feature-name]-implementation-plan.md` with the following format:
+Create the implementation plan document in `./.alucify/plans/[feature-name]-implementation-plan.md` with the following format:
 If multiple codebases are specified, create an implementation plan document at each codebase.
 
 ```markdown
