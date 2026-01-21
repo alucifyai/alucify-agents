@@ -177,6 +177,29 @@ Each implementation plan at one codebase can support only the relevant parts of 
 - **Define deployment order**: Clarify if codebases have deployment dependencies
 - **Enable parallel development**: Mark which codebases can develop independently
 
+### 8. Multi-Codebase Coordination Artifact Refinements (When Multiple Codebases Involved)
+
+#### 8.1 Integration Contracts Document Refinements
+If the audit report identifies issues with `integration-contracts.md`:
+- **Add missing contracts**: Ensure all cross-codebase integration points have defined contracts
+- **Fix contract ownership**: Clarify owner codebase for each contract
+- **Add/fix consumers**: Document which codebases depend on each contract
+- **Improve specifications**: Add detailed, unambiguous specifications with examples
+- **Add versioning/change management**: Define how contract changes are managed
+
+#### 8.2 Cross-Codebase Milestone Plan Refinements
+If the audit report identifies issues with `cross-codebase-milestone-plan.md`:
+- **Map missing phases**: Ensure all phases from all codebases are mapped to milestones
+- **Add sync points**: Define clear coordination points between teams
+- **Add/fix exit criteria**: Each milestone needs verifiable exit criteria
+- **Document critical path**: Show dependencies and critical path
+- **Add parallelization guidance**: Clarify what can proceed in parallel
+
+#### 8.3 Contract-Plan Alignment Refinements
+- **Fix timing issues**: Ensure contracts are defined before phases that depend on them
+- **Update dependency tracking**: Document which phases depend on which contracts
+- **Align ownership**: Ensure contract owners match phase ownership appropriately
+
 ## Refinement Methodology
 
 ### Phase 1: Comprehensive Review
@@ -500,6 +523,15 @@ Before finalizing the refined plan, perform the following checks:
 - No file:line references to non-existent code
 - All patterns cite architecture documentation
 - Cross-codebase dependencies are documented
+
+### Multi-Codebase Artifact Checks (when multiple codebases involved)
+- Integration contracts document audit issues are addressed
+- All contracts have owners and consumers defined
+- Contract specifications are complete and unambiguous
+- Cross-codebase milestone plan audit issues are addressed
+- All phases mapped to milestones
+- Sync points and exit criteria defined
+- Contract-plan timing alignment is correct
 
 # Working Process
 1. **Detect project mode** (greenfield vs brownfield)

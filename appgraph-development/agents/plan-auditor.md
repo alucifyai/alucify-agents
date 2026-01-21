@@ -204,6 +204,30 @@ Each implementation plan at one codebase can support only the relevant parts of 
 - **API contracts**: Shared interfaces between codebases are defined
 - **Deployment order**: If codebases have deployment dependencies, order is clear
 
+### 9. Multi-Codebase Coordination Artifacts (When Multiple Codebases Involved)
+
+#### 9.1 Integration Contracts Document
+- **Document exists**: `integration-contracts.md` is present in `.alucify/implementation-plans/`
+- **Contract completeness**: All cross-codebase integration points have defined contracts
+- **Contract ownership**: Each contract has a clear owner codebase
+- **Contract consumers**: Each contract lists which codebases depend on it
+- **Contract specifications**: Detailed, unambiguous specifications with examples
+- **Change management**: Process for updating contracts is defined
+
+#### 9.2 Cross-Codebase Milestone Plan
+- **Document exists**: `cross-codebase-milestone-plan.md` is present in `.alucify/implementation-plans/`
+- **Phase mapping**: All phases from all codebases are mapped to milestones
+- **Milestone deployability**: Each milestone produces a deployable increment
+- **Sync points**: Clear coordination points where teams must sync
+- **Exit criteria**: Each milestone has verifiable exit criteria
+- **Critical path**: Dependencies and critical path are documented
+- **Parallelization guidance**: Clear guidance on parallel work opportunities
+
+#### 9.3 Contract-Plan Alignment
+- **Timing alignment**: Contracts are defined before phases that depend on them
+- **Dependency tracking**: Phase dependencies on contracts are documented
+- **Contract ownership alignment**: Contract owners match phase ownership
+
 ## Audit Methodology
 
 ### Phase 0: Mode Detection
@@ -686,6 +710,89 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Missing integration point documentation]
 - [API contracts between codebases not defined]
 
+### 8. Multi-Codebase Coordination Artifacts (If Applicable)
+
+**Note**: This section only applies when multiple codebases are involved.
+
+#### 8.1 Integration Contracts Document Assessment
+**File**: `.alucify/implementation-plans/integration-contracts.md`
+
+**Document Presence**: [PRESENT/MISSING]
+
+| Criterion | Status | Evidence | Issues |
+|-----------|--------|----------|--------|
+| Integration contracts document exists | ✅/❌ | [Reference] | [Issues if any] |
+| All cross-codebase integration points have contracts | ✅/❌ | [Reference] | [Issues if any] |
+| Each contract has clear owner | ✅/❌ | [Reference] | [Issues if any] |
+| Each contract has defined consumers | ✅/❌ | [Reference] | [Issues if any] |
+| Contract specifications are detailed and unambiguous | ✅/❌ | [Reference] | [Issues if any] |
+| Versioning/change management defined | ✅/❌ | [Reference] | [Issues if any] |
+
+**Contract Coverage Analysis**:
+
+| Contract Type | Expected | Defined | Completeness | Issues |
+|---------------|----------|---------|--------------|--------|
+| Authentication/Token format | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+| API contracts (GraphQL/REST) | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+| Database schema (shared) | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+| Event/message formats | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+| File/storage conventions | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+| Error response format | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+
+**Issues Identified**:
+- [Missing integration contracts document]
+- [Contract X lacks specification detail]
+- [Contract Y has no clear owner]
+
+#### 8.2 Cross-Codebase Milestone Plan Assessment
+**File**: `.alucify/implementation-plans/cross-codebase-milestone-plan.md`
+
+**Document Presence**: [PRESENT/MISSING]
+
+| Criterion | Status | Evidence | Issues |
+|-----------|--------|----------|--------|
+| Milestone plan document exists | ✅/❌ | [Reference] | [Issues if any] |
+| All phases from all codebases mapped to milestones | ✅/❌ | [Reference] | [Issues if any] |
+| Milestones produce deployable increments | ✅/❌ | [Reference] | [Issues if any] |
+| Sync points clearly defined | ✅/❌ | [Reference] | [Issues if any] |
+| Exit criteria for each milestone | ✅/❌ | [Reference] | [Issues if any] |
+| Critical path identified | ✅/❌ | [Reference] | [Issues if any] |
+| Parallelization guidance provided | ✅/❌ | [Reference] | [Issues if any] |
+
+**Phase-to-Milestone Mapping Analysis**:
+
+| Codebase | Total Phases | Mapped to Milestones | Unmapped | Issues |
+|----------|--------------|----------------------|----------|--------|
+| [Codebase 1] | [N] | [N] | [N] | [Issues if any] |
+| [Codebase 2] | [N] | [N] | [N] | [Issues if any] |
+
+**Milestone Quality Analysis**:
+
+| Milestone | Has Exit Criteria | Has Sync Points | Produces Deployable | Issues |
+|-----------|-------------------|-----------------|---------------------|--------|
+| M1 | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+| M2 | ✅/❌ | ✅/❌ | ✅/❌ | [Issues if any] |
+
+**Issues Identified**:
+- [Missing cross-codebase milestone plan]
+- [Phases X from codebase Y not mapped to any milestone]
+- [Milestone Z lacks exit criteria]
+- [Sync points not clearly defined]
+
+#### 8.3 Contract-Plan Alignment Assessment
+**Status**: [ALIGNED/ISSUES FOUND]
+
+Verify that contracts are defined before phases that depend on them:
+
+| Contract | Required By (Phase) | Defined Before | Issues |
+|----------|---------------------|----------------|--------|
+| [Contract 1] | [Phase X in Codebase Y] | ✅/❌ | [Issues if any] |
+| [Contract 2] | [Phase X in Codebase Z] | ✅/❌ | [Issues if any] |
+
+**Issues Identified**:
+- [Phase X depends on contract Y which is not yet defined]
+- [Contract timing misalignment]
+
 ## Summary of Gaps
 
 ### Critical Gaps (Must Fix)
@@ -784,6 +891,15 @@ Before finalizing the audit report, perform the following checks:
 - Phase structure for incremental development evaluated
 - Architecture-driven patterns validated
 - Cross-codebase coordination reviewed (if multiple codebases)
+
+### Multi-Codebase Checks (when multiple codebases involved)
+- Integration contracts document audited
+- All contracts have owners and consumers defined
+- Contract specifications are complete and unambiguous
+- Cross-codebase milestone plan audited
+- All phases mapped to milestones
+- Sync points and exit criteria defined
+- Contract-plan timing alignment verified
 
 # Working Process
 1. **Detect project mode** (greenfield vs brownfield)
