@@ -85,6 +85,8 @@ If multiple codebases are specified, provide locations of the AppGraph at each c
 ## PRD (Product Requirements Document)
 The PRD is available in the `./.alucify/prd.md` file. It contains the requirements and objectives for the feature. You must ensure your implementation plan includes ONLY features and tasks specified in the PRD - no additional features should be included.
 
+If `.alucify/prd.md` does not exist, take the document or documents that are specified when run this command. Treat the unification of the documents as a PRD to be supported. Obey all the implementation plan requirements described above. If any file is too large, read by chunks.
+
 ## Architecture Specification
 Architecture specifications define the tech stack, frameworks, libraries, patterns, and conventions for each codebase.
 
@@ -272,6 +274,25 @@ High-level strategy and reasoning:
 - How end-to-end testing will be enabled at each milestone
 - Parallel implementation opportunities
 
+### Implementation Decisions Registry
+
+**CRITICAL**: Track and document EVERY implementation decision made during planning. Each decision must be fully documented with its grounding and source.
+
+For each significant implementation decision, document:
+
+1. **Decision Title**: Clear, descriptive name (Example: "Create CM Entity Types Mapping File")
+2. **Decision Summary**: Concise description of what will be done (Example: "Create a new file containing all ~100 CM entity type mappings with icons, routes, and translation keys. Entity type identifiers use dot notation (e.g., 'queues.phone') to match backend AuditObjectTypes.php exactly.")
+3. **Grounding**: One of:
+   - **Full**: Decision is fully grounded in specific code/documentation with exact references
+   - **Partial**: Decision partially supported by evidence, some aspects inferred/extended
+   - **None**: Decision based on best practices/assumptions without direct evidence
+4. **Details**: Comprehensive source and reasoning including:
+   - **Source Files**: Specific files and line numbers examined
+   - **Evidence**: Direct quotes from code/documentation supporting the decision
+   - **Analysis**: How you arrived at this decision from the evidence
+   - **Alternatives Considered**: Other approaches and why they were rejected
+   - **Assumptions**: Any assumptions made where evidence was incomplete
+
 ### Implementation Phases
 Break the work into phases. Each phase should:
 - Be independently deliverable
@@ -289,12 +310,28 @@ For each phase:
 #### Phase [N]: [Descriptive Name]
 [Brief description, scope, and goals of this phase]
 
+**Phase-Level Implementation Decisions:**
+- **Decision**: [Key architectural or design decision for this phase]
+  - **Rationale**: [Why this approach was chosen]
+  - **Alternatives Considered**: [Other options and why rejected]
+  - **Risk**: [Any risks associated with this decision]
+
 ##### Task [N.M]: [Descriptive Name]
 - **Scope and Goals**: What this task accomplishes and why it's necessary
 - **Impact Subgraph**: List of nodes and edges from AppGraph affected by this task
   - New nodes: [list with status=new]
   - Modified nodes: [list with status=modified]
   - Edges: [list of relationships]
+- **Implementation Decisions**:
+  - **File Structure**: [Where and how files will be organized]
+    - Grounding: [Full/Partial/None - based on architecture/codebase evidence]
+    - Evidence: [Reference to architecture doc or existing code pattern]
+  - **Pattern Choice**: [Specific design pattern or approach]
+    - Grounding: [Full/Partial/None]
+    - Evidence: [Reference supporting this choice]
+  - **Library Selection**: [If specific libraries chosen]
+    - Grounding: [Full/Partial/None]
+    - Evidence: [Why these libraries]
 - **Architecture & Tech Stack**: Specific technologies, frameworks, patterns to use
   - Framework: [e.g., React, Express, etc.]
   - Libraries: [specific libraries]
@@ -336,29 +373,42 @@ For each phase:
 
 ### Phase 3: Task Breakdown and Planning
 
+**CRITICAL - Decision Tracking**: As you plan implementation tasks, maintain a registry of EVERY significant implementation decision. For each decision:
+- Note the specific evidence that informed it (file:line references)
+- Classify grounding level (Full/Partial/None)
+- Document alternatives considered
+- Record assumptions where evidence is incomplete
+
 **For Greenfield Projects:**
 1. **Identify first deployable vertical slice**
    - What is the minimum set of components to have a working, testable system?
    - Include infrastructure setup (project scaffolding, database, CI/CD)
+   - **DECISION POINT**: Document why this specific slice was chosen
 2. Group remaining AppGraph nodes into logical implementation units
+   - **DECISION POINT**: Document grouping rationale and alternatives
 3. Structure phases for incremental deployment
+   - **DECISION POINT**: Document phase ordering and dependency reasoning
 4. Identify parallelization opportunities between phases
 5. For each task, identify:
    - Required inputs (from architecture specs or previous tasks)
    - Outputs (files created, APIs exposed, etc.)
    - Tech stack components from architecture specs
    - Testing approach
+   - **DECISION POINT**: Document specific implementation choices (file locations, patterns, libraries)
 6. Ensure each task is independently testable
 7. Validate no tasks include out-of-scope features
 
 **For Brownfield Projects:**
 1. Group related AppGraph nodes into logical implementation units
+   - **DECISION POINT**: Document grouping rationale based on codebase analysis
 2. Order tasks based on dependencies (no circular dependencies)
+   - **DECISION POINT**: Document ordering decisions and constraints
 3. For each task, identify:
    - Required inputs (from previous tasks or existing code)
    - Outputs (files created, APIs exposed, etc.)
    - Tech stack components needed
    - Testing approach
+   - **DECISION POINT**: Document specific implementation choices (patterns to follow, files to modify)
 4. Ensure each task is independently testable
 5. Validate no tasks include out-of-scope features
 
@@ -387,13 +437,20 @@ For each phase:
 5. Review any existing implementation plans
 6. Identify all nodes to implement (filtered by implementation_status for greenfield)
 7. Trace dependencies and data flow through the AppGraph
-8. **For greenfield:** Identify the first deployable vertical slice and structure phases for incremental deployment
-9. Break down implementation into phases and tasks
-10. For each task, specify scope, impact subgraph, tech stack, and success criteria
-11. Ensure strict alignment with PRD (no additional features)
-12. Ensure all tasks align with the architecture specifications
-13. **For greenfield:** Identify parallelization opportunities between phases
-14. Perform quality checks before finalizing
+8. **CRITICAL**: As you analyze and plan, maintain a registry of ALL implementation decisions:
+   - Track every decision about file creation, pattern usage, library choices, etc.
+   - Document the specific evidence (files, lines, quotes) that informed each decision
+   - Classify each decision's grounding (Full/Partial/None)
+   - Record alternatives considered and why they were rejected
+   - Note assumptions made where evidence was incomplete
+9. **For greenfield:** Identify the first deployable vertical slice and structure phases for incremental deployment
+10. Break down implementation into phases and tasks
+11. For each task, specify scope, impact subgraph, tech stack, and success criteria
+12. Ensure strict alignment with PRD (no additional features)
+13. Ensure all tasks align with the architecture specifications
+14. **For greenfield:** Identify parallelization opportunities between phases
+15. Compile the Implementation Decisions Registry with all tracked decisions
+16. Perform quality checks before finalizing
 
 # Output
 
@@ -457,6 +514,25 @@ If multiple codebases are specified, create:
 - **End-to-End Testing Points**: [When E2E testing becomes possible]
 - **Parallel Implementation Opportunities**: [Which phases/codebases can proceed in parallel]
 
+## Implementation Decisions Registry
+
+### Decision 1: [Decision Title]
+- **Decision Summary**: [Concise description of what will be done]
+- **Grounding**: [Full/Partial/None]
+- **Details**:
+  - **Source Files**: 
+    - [file1:lines] - [what was examined]
+    - [file2:lines] - [what was examined]
+  - **Evidence**: 
+    - [Direct quote or reference from source]
+    - [Additional supporting evidence]
+  - **Analysis**: [How this evidence led to the decision]
+  - **Alternatives Considered**: [Other approaches and why rejected]
+  - **Assumptions**: [Any assumptions made]
+
+### Decision 2: [Decision Title]
+[Continue pattern for each major implementation decision...]
+
 ## Implementation Phases
 
 ### Phase 1: [Descriptive Name of Phase]
@@ -467,6 +543,12 @@ If multiple codebases are specified, create:
 - **Can Parallelize With**: [List phases that can run in parallel with this one, or "None"]
 - **Cross-Codebase Dependencies**: [Dependencies on other codebases, if any]
 
+**Phase-Level Implementation Decisions:**
+- **Decision**: [Key architectural or design decision for this phase]
+  - **Rationale**: [Why this approach was chosen]
+  - **Alternatives Considered**: [Other options and why rejected]
+  - **Risk**: [Any risks associated with this decision]
+
 #### Task 1.1: [Descriptive Name of Task]
 - **Scope and Goals**: [What this accomplishes and why]
 - **Impact Subgraph**:
@@ -474,6 +556,16 @@ If multiple codebases are specified, create:
   - New Nodes: [nodes with status=new from AppGraph - all nodes for greenfield]
   - Modified Nodes: [nodes with status=modified from AppGraph - N/A for greenfield]
   - Edges: [relationships from AppGraph]
+- **Implementation Decisions**:
+  - **File Structure**: [Where and how files will be organized]
+    - Grounding: [Full/Partial/None - based on architecture/codebase evidence]
+    - Evidence: [Reference to architecture doc or existing code pattern]
+  - **Pattern Choice**: [Specific design pattern or approach]
+    - Grounding: [Full/Partial/None]
+    - Evidence: [Reference supporting this choice]
+  - **Library Selection**: [If specific libraries chosen]
+    - Grounding: [Full/Partial/None]
+    - Evidence: [Why these libraries]
 - **Architecture & Tech Stack**:
   - Framework: [specific framework from architecture spec]
   - Libraries: [specific libraries from architecture spec]

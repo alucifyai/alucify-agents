@@ -41,6 +41,8 @@ The PRD is available in the `./.alucify/prd.md` file. It contains:
 - Success metrics
 You will verify that all requirements are covered in the implementation plan.
 
+If `.alucify/prd.md` does not exist, take the document or documents that are specified when run this command. Treat the unification of the documents as a PRD to be supported. Obey all the implementation plan requirements described above. If any file is too large, read by chunks.
+
 ## AppGraph
 The AppGraph defines all components to be implemented.
 
@@ -166,9 +168,51 @@ Each implementation plan at one codebase can support only the relevant parts of 
 - **Status accuracy**: Node statuses (new/modified) are correct (all "new" for greenfield)
 - **Completeness**: No affected components are missing
 
-### 8. Greenfield-Specific Criteria (When Applicable)
+### 8. Implementation Decisions Registry Quality (CRITICAL)
 
-#### 8.0 Implementation Status Filtering
+#### 8.1 Registry Completeness
+- **Registry exists**: The Implementation Decisions Registry section is present
+- **All significant decisions documented**: Every major implementation choice is recorded
+- **Decision coverage**: All file creation, pattern usage, library choices, etc. are tracked
+- **No undocumented decisions**: No major choices made without registry entry
+
+#### 8.2 Decision Documentation Quality
+- **Title clarity**: Each decision has a clear, descriptive title
+- **Summary completeness**: Decision summaries explain what will be done
+- **Grounding classification**: Each decision classified as Full/Partial/None
+- **Details thoroughness**: Source files, evidence, analysis, alternatives, and assumptions documented
+
+#### 8.3 Evidence Quality
+- **Source file references**: Specific files and line numbers provided where applicable
+- **Evidence quotes**: Direct quotes from code/documentation supporting decisions
+- **Analysis depth**: Clear explanation of how evidence led to decision
+- **Alternatives consideration**: Other approaches considered and rejection reasons
+- **Assumption transparency**: Gaps in evidence are explicitly acknowledged
+
+#### 8.4 Grounding Assessment
+- **Full grounding accuracy**: Decisions marked "Full" have complete evidence
+- **Partial grounding justification**: Decisions marked "Partial" identify what's missing
+- **None grounding acknowledgment**: Decisions marked "None" explain why evidence is absent
+- **Grounding distribution**: Assess ratio of Full:Partial:None decisions
+
+#### 8.5 Phase-Level Implementation Decisions
+- **Phase decisions present**: Each phase has documented implementation decisions
+- **Architectural choices**: Key architectural decisions for the phase are captured
+- **Rationale quality**: Clear reasoning for phase-level approaches
+- **Alternatives documented**: Other phase approaches considered and rejected
+- **Risk identification**: Risks associated with phase decisions are noted
+
+#### 8.6 Task-Level Implementation Decisions
+- **Task decisions present**: Each task has specific implementation decisions
+- **File structure decisions**: Where and how files will be organized is documented
+- **Pattern choice decisions**: Specific design patterns or approaches are explained
+- **Library selection decisions**: If libraries are chosen, reasoning is provided
+- **Grounding for each decision**: Each task-level decision has grounding classification
+- **Evidence traceability**: Task decisions reference specific architecture docs or code
+
+### 9. Greenfield-Specific Criteria (When Applicable)
+
+#### 9.0 Implementation Status Filtering
 - **Correct exclusion**: Nodes/edges with `implementation_status` = "completed", "finished", "done", "implemented" are NOT in the plan
 - **Correct inclusion**: All non-completed nodes/edges are included in the plan
 - **No completed components**: Plan does not include tasks for already-implemented functionality
@@ -180,33 +224,33 @@ Each implementation plan at one codebase can support only the relevant parts of 
 3. List all nodes/edges in AppGraph with non-completed `implementation_status` (or no status)
 4. Verify ALL of these are covered in the implementation plan
 
-#### 8.1 Deployability
+#### 9.1 Deployability
 - **First deployable milestone**: Phase 1 produces a runnable, testable component
 - **Incremental milestones**: Each deployment milestone adds meaningful functionality
 - **End-to-end testing readiness**: Clear points where E2E testing becomes possible
 - **Milestone documentation**: Deployment milestones are clearly documented
 
-#### 8.2 Phase Structure for Incremental Development
+#### 9.2 Phase Structure for Incremental Development
 - **Vertical slices**: Phases are organized as vertical slices where possible (not horizontal layers)
 - **Parallelization identified**: Phases that can run in parallel are marked
 - **Dependencies documented**: Cross-phase and cross-codebase dependencies are clear
 - **Scaffolding included**: Infrastructure/scaffolding tasks are in early phases
 
-#### 8.3 Architecture-Driven Patterns
+#### 9.3 Architecture-Driven Patterns
 - **No codebase references**: No file:line references to non-existent code
 - **Architecture doc references**: Patterns reference architecture specification documents
 - **Domain model usage**: Domain entities align with `prd-architecture-domain-model.json`
 - **Tech stack from specs**: All technologies are derived from architecture specs
 
-#### 8.4 Cross-Codebase Coordination
+#### 9.4 Cross-Codebase Coordination
 - **Integration points identified**: Where codebases interact is documented
 - **Parallel development opportunities**: Which codebases can develop in parallel
 - **API contracts**: Shared interfaces between codebases are defined
 - **Deployment order**: If codebases have deployment dependencies, order is clear
 
-### 9. Multi-Codebase Coordination Artifacts (When Multiple Codebases Involved)
+### 10. Multi-Codebase Coordination Artifacts (When Multiple Codebases Involved)
 
-#### 9.1 Integration Contracts Document
+#### 10.1 Integration Contracts Document
 - **Document exists**: `integration-contracts.md` is present in `.alucify/implementation-plans/`
 - **Contract completeness**: All cross-codebase integration points have defined contracts
 - **Contract ownership**: Each contract has a clear owner codebase
@@ -214,7 +258,7 @@ Each implementation plan at one codebase can support only the relevant parts of 
 - **Contract specifications**: Detailed, unambiguous specifications with examples
 - **Change management**: Process for updating contracts is defined
 
-#### 9.2 Cross-Codebase Milestone Plan
+#### 10.2 Cross-Codebase Milestone Plan
 - **Document exists**: `cross-codebase-milestone-plan.md` is present in `.alucify/implementation-plans/`
 - **Phase mapping**: All phases from all codebases are mapped to milestones
 - **Milestone deployability**: Each milestone produces a deployable increment
@@ -223,7 +267,7 @@ Each implementation plan at one codebase can support only the relevant parts of 
 - **Critical path**: Dependencies and critical path are documented
 - **Parallelization guidance**: Clear guidance on parallel work opportunities
 
-#### 9.3 Contract-Plan Alignment
+#### 10.3 Contract-Plan Alignment
 - **Timing alignment**: Contracts are defined before phases that depend on them
 - **Dependency tracking**: Phase dependencies on contracts are documented
 - **Contract ownership alignment**: Contract owners match phase ownership
@@ -286,6 +330,26 @@ Each implementation plan at one codebase can support only the relevant parts of 
 5. Review phase structure and ordering
 6. Verify phase deliverability
 7. Identify quality issues and improvements
+
+### Phase 5a: Implementation Decisions Registry Review
+1. **Verify registry exists** in the implementation plan
+2. **Count significant decisions** vs registry entries
+3. **Assess decision documentation quality**:
+   - Check each decision has title, summary, grounding, details
+   - Verify grounding classifications are accurate
+   - Check evidence quality (file references, quotes, analysis)
+   - Verify alternatives and assumptions are documented
+4. **Analyze grounding distribution**:
+   - Count Full/Partial/None decisions
+   - Assess if grounding levels are justified
+   - Identify decisions that need better evidence
+5. **Cross-reference decisions with tasks**:
+   - Verify major task choices appear in registry
+   - Check that registry decisions align with task specifications
+6. **Identify missing decisions**:
+   - File creation decisions not documented
+   - Pattern/library choices not explained
+   - Architecture decisions not recorded
 
 ### Phase 5.5: Greenfield-Specific Validation (If Applicable)
 **Only perform this phase for greenfield projects:**
@@ -627,11 +691,98 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Node marked as modified but doesn't exist] (brownfield only)
 - [For greenfield: All nodes should be "new"]
 
-### 7. Greenfield-Specific Assessment (If Applicable)
+### 7. Implementation Decisions Registry Assessment
+
+#### 7.1 Registry Completeness
+**Status**: [COMPLETE/INCOMPLETE/MISSING]
+
+| Criterion | Status | Evidence | Issues |
+|-----------|--------|----------|--------|
+| Registry section exists | ✅/❌ | [Location in plan] | [Issues if any] |
+| All major decisions documented | ✅/❌ | [Count: documented vs expected] | [Missing decisions] |
+| File creation decisions tracked | ✅/❌ | [Examples] | [Issues if any] |
+| Pattern/library choices tracked | ✅/❌ | [Examples] | [Issues if any] |
+| Architecture decisions tracked | ✅/❌ | [Examples] | [Issues if any] |
+
+**Missing Decisions Identified**:
+- [Decision type not documented]
+- [Specific choice made but not recorded]
+
+#### 7.2 Decision Documentation Quality
+**Status**: [EXCELLENT/GOOD/NEEDS IMPROVEMENT/POOR]
+
+| Decision ID | Title | Summary | Grounding | Details | Quality Score |
+|-------------|-------|---------|-----------|---------|---------------|
+| Decision 1 | ✅/⚠️/❌ | ✅/⚠️/❌ | Full/Partial/None | ✅/⚠️/❌ | [1-5] |
+| Decision 2 | ✅/⚠️/❌ | ✅/⚠️/❌ | Full/Partial/None | ✅/⚠️/❌ | [1-5] |
+
+**Documentation Issues**:
+- [Decision X lacks clear title]
+- [Decision Y missing evidence/quotes]
+- [Decision Z alternatives not considered]
+
+#### 7.3 Evidence and Grounding Analysis
+**Status**: [WELL-GROUNDED/PARTIALLY-GROUNDED/POORLY-GROUNDED]
+
+**Grounding Distribution**:
+- Fully grounded decisions: [N] ([%])
+- Partially grounded decisions: [N] ([%])
+- Ungrounded decisions: [N] ([%])
+
+**Grounding Accuracy Assessment**:
+| Decision | Claimed Grounding | Actual Grounding | Discrepancy | Issue |
+|----------|-------------------|------------------|-------------|-------|
+| [Decision X] | Full | Partial | Yes | [Missing evidence] |
+| [Decision Y] | Partial | Full | Yes | [Under-claimed] |
+
+**Evidence Quality Issues**:
+- [Decision X claims file:line but reference incorrect]
+- [Decision Y missing direct quotes from source]
+- [Decision Z analysis doesn't connect to evidence]
+
+#### 7.4 Decision-Task Alignment
+**Status**: [ALIGNED/MISALIGNED]
+
+| Task | Related Decision | Decision Documented | Alignment | Issues |
+|------|------------------|---------------------|-----------|--------|
+| Task 1.1 | [Decision type] | ✅/❌ | ✅/❌ | [Issues if any] |
+| Task 1.2 | [Decision type] | ✅/❌ | ✅/❌ | [Issues if any] |
+
+**Alignment Issues**:
+- [Task X makes choice Y but no decision recorded]
+- [Decision A documented but not reflected in tasks]
+
+#### 7.5 Phase-Level Decision Assessment
+**Status**: [COMPLETE/INCOMPLETE/MISSING]
+
+| Phase | Decision Present | Rationale Quality | Alternatives | Risk Identified | Score |
+|-------|-----------------|-------------------|--------------|-----------------|-------|
+| Phase 1 | ✅/❌ | Good/Fair/Poor | ✅/❌ | ✅/❌ | [1-5] |
+| Phase 2 | ✅/❌ | Good/Fair/Poor | ✅/❌ | ✅/❌ | [1-5] |
+
+**Phase Decision Issues**:
+- [Phase X missing architectural decision]
+- [Phase Y rationale unclear]
+- [Phase Z risks not identified]
+
+#### 7.6 Task-Level Decision Assessment
+**Status**: [COMPLETE/PARTIAL/INSUFFICIENT]
+
+| Task | File Structure | Pattern Choice | Library Selection | Grounding Quality | Score |
+|------|---------------|----------------|-------------------|-------------------|-------|
+| Task 1.1 | ✅/⚠️/❌ | ✅/⚠️/❌ | ✅/⚠️/❌ | Full/Partial/None | [1-5] |
+| Task 1.2 | ✅/⚠️/❌ | ✅/⚠️/❌ | ✅/⚠️/❌ | Full/Partial/None | [1-5] |
+
+**Task Decision Issues**:
+- [Task X.Y missing file structure decision]
+- [Task X.Y pattern choice not grounded]
+- [Task X.Y library selection lacks evidence]
+
+### 8. Greenfield-Specific Assessment (If Applicable)
 
 **Note**: This section only applies to greenfield projects.
 
-#### 7.0 Implementation Status Filtering Assessment
+#### 8.0 Implementation Status Filtering Assessment
 **Status**: [CORRECT/ISSUES FOUND]
 
 **Completed Nodes/Edges (Should NOT be in plan):**
@@ -654,7 +805,7 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Completed node X incorrectly included in Task Y]
 - [Non-completed node Z missing from implementation plan]
 
-#### 7.1 Deployability Assessment
+#### 8.1 Deployability Assessment
 **Status**: [COMPLIANT/ISSUES FOUND]
 
 | Criterion | Status | Evidence | Issues |
@@ -668,7 +819,7 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Phase 1 does not produce a runnable component]
 - [Deployment milestones not clearly defined]
 
-#### 7.2 Phase Structure Assessment
+#### 8.2 Phase Structure Assessment
 **Status**: [OPTIMAL/NEEDS IMPROVEMENT]
 
 | Criterion | Status | Evidence | Issues |
@@ -682,7 +833,7 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Phases organized as horizontal layers instead of vertical slices]
 - [Parallelization opportunities not identified]
 
-#### 7.3 Architecture-Driven Patterns Assessment
+#### 8.3 Architecture-Driven Patterns Assessment
 **Status**: [COMPLIANT/ISSUES FOUND]
 
 | Criterion | Status | Evidence | Issues |
@@ -696,7 +847,7 @@ If multiple codebases are specified, create an audit report document at each cod
 - [References to non-existent code files]
 - [Missing architecture document references]
 
-#### 7.4 Cross-Codebase Coordination Assessment
+#### 8.4 Cross-Codebase Coordination Assessment
 **Status**: [DOCUMENTED/NEEDS IMPROVEMENT]
 
 | Criterion | Status | Evidence | Issues |
@@ -710,11 +861,11 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Missing integration point documentation]
 - [API contracts between codebases not defined]
 
-### 8. Multi-Codebase Coordination Artifacts (If Applicable)
+### 9. Multi-Codebase Coordination Artifacts (If Applicable)
 
 **Note**: This section only applies when multiple codebases are involved.
 
-#### 8.1 Integration Contracts Document Assessment
+#### 9.1 Integration Contracts Document Assessment
 **File**: `.alucify/implementation-plans/integration-contracts.md`
 
 **Document Presence**: [PRESENT/MISSING]
@@ -744,7 +895,7 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Contract X lacks specification detail]
 - [Contract Y has no clear owner]
 
-#### 8.2 Cross-Codebase Milestone Plan Assessment
+#### 9.2 Cross-Codebase Milestone Plan Assessment
 **File**: `.alucify/implementation-plans/cross-codebase-milestone-plan.md`
 
 **Document Presence**: [PRESENT/MISSING]
@@ -779,7 +930,7 @@ If multiple codebases are specified, create an audit report document at each cod
 - [Milestone Z lacks exit criteria]
 - [Sync points not clearly defined]
 
-#### 8.3 Contract-Plan Alignment Assessment
+#### 9.3 Contract-Plan Alignment Assessment
 **Status**: [ALIGNED/ISSUES FOUND]
 
 Verify that contracts are defined before phases that depend on them:
@@ -840,6 +991,29 @@ Verify that contracts are defined before phases that depend on them:
 ### 5. Phase Structure Improvements
 - [Specific recommendation with reference]
 - [Specific recommendation with reference]
+
+### 6. Implementation Decisions Registry Improvements
+
+#### 6.1 Overall Registry Improvements
+- [Add missing decisions for file creation choices]
+- [Improve grounding for partially-grounded decisions]
+- [Add evidence quotes for decisions lacking support]
+- [Document alternatives for decisions missing consideration]
+- [Correct grounding classifications that are inaccurate]
+
+#### 6.2 Phase-Level Decision Improvements
+- [Add architectural decisions for Phase X]
+- [Clarify rationale for Phase Y approach]
+- [Document alternatives considered for Phase Z]
+- [Identify and document risks for Phase N]
+- [Strengthen evidence for phase-level choices]
+
+#### 6.3 Task-Level Decision Improvements
+- [Document file structure decisions for Task X.Y]
+- [Add pattern choice rationale for Task X.Y]
+- [Provide library selection evidence for Task X.Y]
+- [Improve grounding classification for Task X.Y decisions]
+- [Add missing implementation decisions for Task X.Y]
 
 ## Action Items
 

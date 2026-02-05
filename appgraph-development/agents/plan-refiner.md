@@ -50,6 +50,8 @@ If multiple codebases are specified, provide locations of the implementation pla
 ## PRD (Product Requirements Document)
 The PRD is available in `./.alucify/prd.md`. You will use this to ensure all requirements are covered and no out-of-scope features are included.
 
+If `.alucify/prd.md` does not exist, take the document or documents that are specified when run this command. Treat the unification of the documents as a PRD to be supported. Obey all the implementation plan requirements described above. If any file is too large, read by chunks.
+
 ## AppGraph
 The AppGraph defines all components to be implemented.
 
@@ -148,38 +150,85 @@ Each implementation plan at one codebase can support only the relevant parts of 
 - **Semantic equivalence is required**: Names must match AppGraph nodes semantically
 - **Document semantic mappings**: When using conceptual names, ensure they're unambiguous
 
-### 7. Greenfield-Specific Refinements (When Applicable)
+### 7. Implementation Decisions Registry Refinements
 
-#### 7.0 Implementation Status Filtering Corrections
+#### 7.1 Registry Completeness
+- **Add missing registry**: If the registry section doesn't exist, create it with all decisions
+- **Add missing decisions**: Document any undocumented implementation choices
+- **Track all significant choices**: File creation, pattern usage, library selection, architecture decisions
+- **Cross-reference with tasks**: Ensure major task decisions appear in registry
+
+#### 7.2 Decision Documentation Quality
+- **Improve decision titles**: Make titles clear and descriptive
+- **Complete decision summaries**: Explain what will be done concisely
+- **Correct grounding classifications**: Ensure Full/Partial/None accurately reflects evidence
+- **Enhance details section**:
+  - Add missing source file references
+  - Include direct quotes from evidence
+  - Improve analysis connecting evidence to decision
+  - Document alternatives considered
+  - Acknowledge assumptions explicitly
+
+#### 7.3 Evidence and Grounding Improvements
+- **Upgrade grounding levels**: Find additional evidence to move Partial→Full where possible
+- **Fix grounding misclassifications**: Correct decisions marked Full but lacking evidence
+- **Add missing evidence**: Include file:line references and direct quotes
+- **Improve analysis quality**: Better explain how evidence supports the decision
+- **Document evidence gaps**: For Partial/None grounding, explain what evidence is missing
+
+#### 7.4 Decision-Task Alignment
+- **Link decisions to tasks**: Ensure each major task choice has a corresponding decision
+- **Update tasks from decisions**: If registry decisions conflict with tasks, align them
+- **Remove orphaned decisions**: Remove decisions for tasks that were deleted
+
+#### 7.5 Phase-Level Decision Refinements
+- **Add missing phase decisions**: Ensure each phase has documented implementation decisions
+- **Document architectural choices**: Key design decisions for each phase
+- **Improve rationale**: Clarify why each phase approach was chosen
+- **List alternatives**: Document other phase approaches that were considered
+- **Identify risks**: Add risks associated with phase decisions
+
+#### 7.6 Task-Level Decision Refinements
+- **Add task decisions**: Ensure each task has specific implementation decisions
+- **Document file structure**: Where and how files will be organized for each task
+- **Explain pattern choices**: Specific design patterns or approaches per task
+- **Justify library selections**: If libraries are chosen, provide reasoning
+- **Ground each decision**: Classify grounding (Full/Partial/None) with evidence
+- **Link to architecture**: Reference specific sections of architecture docs
+- **Add rationale to tasks**: Reference relevant decisions in task descriptions
+
+### 8. Greenfield-Specific Refinements (When Applicable)
+
+#### 8.0 Implementation Status Filtering Corrections
 - **Remove completed nodes/edges**: If the plan incorrectly includes nodes/edges with `implementation_status` = "completed", "finished", "done", or "implemented", remove them
 - **Add missing non-completed nodes/edges**: If the plan is missing nodes/edges with non-completed status (or no status), add them
 - **Verify filtering accuracy**: Cross-reference the plan against the AppGraph to ensure only non-completed components are included
 
-#### 7.1 Deployability Corrections
+#### 8.1 Deployability Corrections
 - **Ensure Phase 1 deployability**: Restructure if needed so Phase 1 produces a runnable component
 - **Define deployment milestones**: Add clear milestones if missing
 - **Enable E2E testing**: Ensure E2E testing becomes possible early
 
-#### 7.2 Phase Structure Improvements
+#### 8.2 Phase Structure Improvements
 - **Convert to vertical slices**: Restructure horizontal phases into vertical slices where possible
 - **Identify parallelization**: Mark phases that can run concurrently
 - **Document cross-codebase dependencies**: Add integration point documentation
 - **Include scaffolding early**: Ensure infrastructure tasks are in early phases
 
-#### 7.3 Architecture-Driven Pattern Corrections
+#### 8.3 Architecture-Driven Pattern Corrections
 - **Remove codebase references**: Replace file:line references with architecture doc references
 - **Add architecture citations**: Reference specific sections of architecture documents
 - **Align with domain model**: Ensure entities match `prd-architecture-domain-model.json`
 - **Tech stack from specs only**: Remove any technologies not in architecture specs
 
-#### 7.4 Cross-Codebase Coordination
+#### 8.4 Cross-Codebase Coordination
 - **Document integration points**: Add API contracts between codebases
 - **Define deployment order**: Clarify if codebases have deployment dependencies
 - **Enable parallel development**: Mark which codebases can develop independently
 
-### 8. Multi-Codebase Coordination Artifact Refinements (When Multiple Codebases Involved)
+### 9. Multi-Codebase Coordination Artifact Refinements (When Multiple Codebases Involved)
 
-#### 8.1 Integration Contracts Document Refinements
+#### 9.1 Integration Contracts Document Refinements
 If the audit report identifies issues with `integration-contracts.md`:
 - **Add missing contracts**: Ensure all cross-codebase integration points have defined contracts
 - **Fix contract ownership**: Clarify owner codebase for each contract
@@ -187,7 +236,7 @@ If the audit report identifies issues with `integration-contracts.md`:
 - **Improve specifications**: Add detailed, unambiguous specifications with examples
 - **Add versioning/change management**: Define how contract changes are managed
 
-#### 8.2 Cross-Codebase Milestone Plan Refinements
+#### 9.2 Cross-Codebase Milestone Plan Refinements
 If the audit report identifies issues with `cross-codebase-milestone-plan.md`:
 - **Map missing phases**: Ensure all phases from all codebases are mapped to milestones
 - **Add sync points**: Define clear coordination points between teams
@@ -195,7 +244,7 @@ If the audit report identifies issues with `cross-codebase-milestone-plan.md`:
 - **Document critical path**: Show dependencies and critical path
 - **Add parallelization guidance**: Clarify what can proceed in parallel
 
-#### 8.3 Contract-Plan Alignment Refinements
+#### 9.3 Contract-Plan Alignment Refinements
 - **Fix timing issues**: Ensure contracts are defined before phases that depend on them
 - **Update dependency tracking**: Document which phases depend on which contracts
 - **Align ownership**: Ensure contract owners match phase ownership appropriately
@@ -245,6 +294,34 @@ If the audit report identifies issues with `cross-codebase-milestone-plan.md`:
 3. Improve success criteria (make measurable, testable, complete)
 4. Fix task dependencies and ordering
 5. Improve phase structure and organization
+
+### Phase 6a: Implementation Decisions Registry Refinements
+1. **Add registry if missing**: Create comprehensive registry section
+2. **Address completeness issues**:
+   - Add decisions for all undocumented choices
+   - Document file creation, pattern, library, architecture decisions
+3. **Improve documentation quality**:
+   - Fix unclear titles and incomplete summaries
+   - Correct grounding misclassifications
+   - Add missing evidence (file references, quotes)
+   - Document alternatives and assumptions
+4. **Enhance grounding**:
+   - Find additional evidence to upgrade Partial→Full
+   - Fix decisions incorrectly marked as Full
+   - Explain evidence gaps for Partial/None decisions
+5. **Align with tasks**:
+   - Link each major task choice to a decision
+   - Update tasks to match registry decisions
+   - Remove decisions for deleted tasks
+6. **Add phase-level decisions**:
+   - Document architectural decisions for each phase
+   - Add rationale, alternatives, and risks for phase approaches
+   - Ensure phase decisions align with overall strategy
+7. **Add task-level decisions**:
+   - Document file structure decisions for each task
+   - Add pattern choice and library selection decisions
+   - Ground each task decision with evidence
+   - Link task decisions to architecture docs
 
 ### Phase 6.5: Greenfield-Specific Refinements (If Applicable)
 **Only perform this phase for greenfield projects:**
@@ -315,11 +392,17 @@ If the audit report identifies issues with `cross-codebase-milestone-plan.md`:
 11. Correct all drifts (remove/fix misaligned content)
 12. Apply all quality improvements
 13. **For greenfield:** Apply greenfield-specific refinements
-14. Preserve detailed content for unchanged phases/tasks
-15. Assemble complete, standalone new version
-16. Document revision history
-17. Validate against audit recommendations
-18. Store refined plan as new version
+14. **Refine Implementation Decisions Registry**:
+    - Add registry if missing from original plan
+    - Add missing decisions identified in audit
+    - Improve documentation quality for existing decisions
+    - Correct grounding classifications
+    - Add evidence and analysis where missing
+15. Preserve detailed content for unchanged phases/tasks
+16. Assemble complete, standalone new version
+17. Document revision history
+18. Validate against audit recommendations
+19. Store refined plan as new version
 
 # Output
 
@@ -391,6 +474,25 @@ If multiple codebases are specified, create a refined implementation plan at eac
 - **End-to-End Testing Points**: [When E2E testing becomes possible]
 - **Parallel Implementation Opportunities**: [Which phases/codebases can proceed in parallel]
 
+## Implementation Decisions Registry
+
+### Decision 1: [Clear, Descriptive Title]
+- **Decision Summary**: [Concise description of what will be done]
+- **Grounding**: [Full/Partial/None - must be accurate]
+- **Details**:
+  - **Source Files**: 
+    - [file1:lines] - [what was examined]
+    - [file2:lines] - [what was examined]
+  - **Evidence**: 
+    - [Direct quote or reference from source]
+    - [Additional supporting evidence]
+  - **Analysis**: [How this evidence led to the decision]
+  - **Alternatives Considered**: [Other approaches and why rejected]
+  - **Assumptions**: [Any assumptions made where evidence incomplete]
+
+### Decision 2: [Clear, Descriptive Title]
+[Continue pattern for each major implementation decision...]
+
 ## Implementation Phases
 
 ### Phase 1: [Descriptive Name of Phase]
@@ -401,12 +503,28 @@ If multiple codebases are specified, create a refined implementation plan at eac
 - **Can Parallelize With**: [List phases that can run in parallel with this one, or "None"]
 - **Cross-Codebase Dependencies**: [Dependencies on other codebases, if any]
 
+**Phase-Level Implementation Decisions:**
+- **Decision**: [Key architectural or design decision for this phase]
+  - **Rationale**: [Why this approach was chosen]
+  - **Alternatives Considered**: [Other options and why rejected]
+  - **Risk**: [Any risks associated with this decision]
+
 #### Task 1.1: [Descriptive Name of Task]
 - **Scope and Goals**: [What this accomplishes and why]
 - **Impact Subgraph**:
   - New Nodes: [nodes from AppGraph - may use semantic conceptual names - all nodes for greenfield]
   - Modified Nodes: [nodes from AppGraph - may use semantic conceptual names - N/A for greenfield]
   - Edges: [relationships from AppGraph]
+- **Implementation Decisions**:
+  - **File Structure**: [Where and how files will be organized]
+    - Grounding: [Full/Partial/None - based on architecture/codebase evidence]
+    - Evidence: [Reference to architecture doc or existing code pattern]
+  - **Pattern Choice**: [Specific design pattern or approach]
+    - Grounding: [Full/Partial/None]
+    - Evidence: [Reference supporting this choice]
+  - **Library Selection**: [If specific libraries chosen]
+    - Grounding: [Full/Partial/None]
+    - Evidence: [Why these libraries]
 - **Architecture & Tech Stack**:
   - Framework: [specific framework from architecture spec]
   - Libraries: [specific libraries from architecture spec]
@@ -513,6 +631,19 @@ Before finalizing the refined plan, perform the following checks:
 - Changes are summarized clearly
 - Audit report is referenced
 - Version number is updated correctly
+
+### Implementation Decisions Registry
+- Registry section exists and is complete
+- All major implementation decisions are documented
+- Each decision has title, summary, grounding, and details
+- Grounding classifications (Full/Partial/None) are accurate
+- Evidence includes file references and quotes where applicable
+- Alternatives and assumptions are documented
+- Phase-level decisions are present for each phase
+- Task-level decisions are present for each task
+- Task decisions include file structure, pattern choice, and library selection
+- All decisions are properly grounded with evidence
+- Registry aligns with task specifications
 
 ### Greenfield-Specific Checks
 - Implementation status filtering is correct (no completed nodes/edges in plan, all non-completed included)
