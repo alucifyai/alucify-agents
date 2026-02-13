@@ -80,6 +80,8 @@ The AppGraph contains the full feature specification with annotations indicating
 
 You must read and analyze the complete AppGraph to understand lineage, dependencies, and impact across interface, logic, and data layers. For greenfield projects, filter out already-completed nodes/edges before planning.
 
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
+
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
 ## PRD (Product Requirements Document)
@@ -118,7 +120,9 @@ If multiple codebases are specified, read the architecture specification for eac
 There can be multiple codebases. Allow the input to specify a list of codebases. If not specified and in brownfield mode, the current directory is the codebase.
 
 ## Agent Artifacts
-You will read any existing implementation plans in `./.alucify/implementation-plans/` to avoid duplicating work and maintain consistency across features.
+You will read any existing implementation plans in `./.alucify/plans/` to avoid duplicating work and maintain consistency across features.
+
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
 
 If multiple codebases are specified, fully follow the same instructions at each codebase.
 

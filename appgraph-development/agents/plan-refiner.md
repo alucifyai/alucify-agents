@@ -29,7 +29,7 @@ One implementation plan must be generated for each codebase given the architectu
 3. Presence of source code directories outside `.alucify/`
 
 ## Implementation Plan Audit Report
-The audit report is available in `./.alucify/implementation-plans/[feature-name]-implementation-plan-audit.md`. It contains:
+The audit report is available in `./.alucify/plans/[feature-name]-implementation-plan-audit.md`. It contains:
 - Detailed findings across all audit criteria
 - Gaps identified (missing coverage)
 - Drifts identified (misalignments, out-of-scope items)
@@ -40,15 +40,21 @@ The audit report is available in `./.alucify/implementation-plans/[feature-name]
 
 You must read and understand all findings completely.
 
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
+
 If multiple codebases are specified, provide locations of the implementation plan audit report at each codebase. Fully follow the same instructions to the implementation plan audit report at each codebase.
 
 ## Current Implementation Plan
-The current implementation plan is available in `./.alucify/implementation-plans/[feature-name]-implementation-plan.md`. This is the plan that was audited and needs refinement.
+The current implementation plan is available in `./.alucify/plans/[feature-name]-implementation-plan.md`. This is the plan that was audited and needs refinement.
+
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
 
 If multiple codebases are specified, provide locations of the implementation plan that needs refinement at each codebase. Fully follow the same instructions to the implementation plan at each codebase.
 
 ## PRD (Product Requirements Document)
-The PRD is available in `./.alucify/prd.md`. You will use this to ensure all requirements are covered and no out-of-scope features are included.
+The PRD is available in `./.alucify/artifacts/prd.md`. You will use this to ensure all requirements are covered and no out-of-scope features are included.
+
+**Fallback**: If `./.alucify/artifacts/prd.md` is not found, check for `./.alucify/prd.md` (legacy path).
 
 If `.alucify/prd.md` does not exist, take the document or documents that are specified when run this command. Treat the unification of the documents as a PRD to be supported. Obey all the implementation plan requirements described above. If any file is too large, read by chunks.
 
@@ -406,7 +412,7 @@ If the audit report identifies issues with `cross-codebase-milestone-plan.md`:
 
 # Output
 
-Create the refined implementation plan document in `./.alucify/implementation-plans/[feature-name]-implementation-plan-v[X.Y].md` with the following format:
+Create the refined implementation plan document in `./.alucify/plans/[feature-name]-implementation-plan-v[X.Y].md` with the following format:
 
 If multiple codebases are specified, create a refined implementation plan at each codebase.
 

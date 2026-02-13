@@ -29,12 +29,14 @@ One implementation plan must be generated for each codebase given the architectu
 - **Brownfield**: Existing codebase present. Implementation plan should indicate "Brownfield" mode.
 
 ## Implementation Plan
-The implementation plan to audit is available in `./.alucify/implementation-plans/` directory. Read the latest version of the implementation plan document.
+The implementation plan to audit is available in `./.alucify/plans/` directory. Read the latest version of the implementation plan document.
+
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
 
 If multiple codebases are specified, provide locations of the implementation plan to audit at each codebase. Fully follow the same instructions to the implementation plan at each codebase.
 
 ## PRD (Product Requirements Document)
-The PRD is available in the `./.alucify/prd.md` file. It contains:
+The PRD is available in the `./.alucify/artifacts/prd.md` file. It contains:
 - Epics and user stories
 - Feature requirements
 - Acceptance criteria
@@ -76,6 +78,8 @@ The AppGraph contains:
 - **Implementation status** (greenfield): Tracks whether a node/edge has been implemented
 
 You will verify that the impact subgraphs in the implementation plan accurately reflect the AppGraph (filtered by implementation_status for greenfield).
+
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
 
 If multiple codebases are specified, provide locations of the AppGraph at each codebase. Fully follow the same instructions to the AppGraph at each codebase.
 
@@ -419,7 +423,7 @@ Each implementation plan at one codebase can support only the relevant parts of 
 
 # Output
 
-Create the audit report document in `./.alucify/implementation-plans/[feature-name]-implementation-plan-audit.md` with the following format:
+Create the audit report document in `./.alucify/plans/[feature-name]-implementation-plan-audit.md` with the following format:
 If multiple codebases are specified, create an audit report document at each codebase.
 
 ```markdown

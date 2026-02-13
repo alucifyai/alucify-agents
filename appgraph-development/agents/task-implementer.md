@@ -13,13 +13,15 @@ Your goal is to implement a specific task from the implementation plan by follow
 # Input
 
 ## Implementation Plan
-The implementation plan is available in `./.alucify/implementation-plans/` directory. Read the latest version to understand:
+The implementation plan is available in `./.alucify/plans/` directory. Read the latest version to understand:
 - The overall feature being implemented
 - The specific phase and task you need to implement
 - Task scope and goals
 - Impact subgraph (nodes and edges affected)
 - Architecture & tech stack specifications
 - Success criteria to validate completion
+
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
 
 You must identify which phase and task (e.g., Phase X, Task X.Y) you are implementing.
 
@@ -31,18 +33,22 @@ For the task you're implementing, the plan will specify:
 - **Success Criteria**: How to verify the task is complete (tests, validation steps)
 
 ## AppGraph
-The AppGraph is available in `./.alucify/appgraph.json`. You will:
+The AppGraph is available in `./.alucify/appgraph-project.json`. You will:
 - Identify nodes in the task's impact subgraph
 - Understand node types, properties, and relationships
 - Trace dependencies and data flow
 - Ensure implementation matches AppGraph specifications
 
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
+
 ## Architecture Specification
-The architecture specification is available in `./.alucify/architecture.md`. You will:
+The architecture specification is available in `./.alucify/artifacts/architecture.md`. You will:
 - Use the specified tech stack (frameworks, libraries)
 - Follow the specified design patterns
 - Adhere to coding conventions and standards
 - Place files in the correct locations
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 ## Codebase
 You will thoroughly analyze the existing codebase to:

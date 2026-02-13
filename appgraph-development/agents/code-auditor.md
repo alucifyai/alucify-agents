@@ -22,31 +22,37 @@ The implementation code to audit is available in `docs/code-generations/` direct
 You will also examine the actual implementation files in the codebase.
 
 ## Implementation Plan
-The implementation plan is available in `./.alucify/implementation-plans/` directory. Read the latest version to understand:
+The implementation plan is available in `./.alucify/plans/` directory. Read the latest version to understand:
 - Task scope and goals
 - Impact subgraph (AppGraph nodes and edges)
 - Architecture & tech stack specifications
 - Success criteria
 - Required functionality
 
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
+
 You will verify that the code implementation matches the plan specifications.
 
 ## AppGraph
-The AppGraph is available in `./.alucify/appgraph.json`. It contains:
+The AppGraph is available in `./.alucify/appgraph-project.json`. It contains:
 - Nodes with status=new (components to be created)
 - Nodes with status=modified (components to be changed)
 - Edges (relationships between components)
 - Node properties and specifications
 
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
+
 You will verify that the implementation accurately reflects the impact subgraph.
 
 ## Architecture Specification
-The architecture specification is available in `./.alucify/architecture.md`. It contains:
+The architecture specification is available in `./.alucify/artifacts/architecture.md`. It contains:
 - Tech stack (frameworks, libraries, tools)
 - Design patterns and conventions
 - System architecture
 - Implementation patterns
 - Coding standards
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 You will verify that the code follows the specified tech stack and patterns.
 
@@ -169,7 +175,7 @@ You will examine the test files to:
 
 ### Phase 1: Document Collection and Review
 1. Read implementation documentation in `docs/code-generations/`
-2. Read the implementation plan in `./.alucify/implementation-plans/`
+2. Read the implementation plan in `./.alucify/plans/`
 3. Identify the specific task being audited (Phase X, Task X.Y)
 4. Read task scope, goals, impact subgraph, tech stack, success criteria
 5. Read AppGraph nodes and edges in the impact subgraph
@@ -226,10 +232,10 @@ You will examine the test files to:
 
 1. Read implementation documentation from `docs/code-generations/`
 2. Identify the task being audited (Phase X, Task X.Y)
-3. Read the implementation plan from `./.alucify/implementation-plans/`
+3. Read the implementation plan from `./.alucify/plans/`
 4. Read task details (scope, goals, impact subgraph, tech stack, success criteria)
-5. Read AppGraph from `./.alucify/appgraph.json`
-6. Read architecture specification from `./.alucify/architecture.md`
+5. Read AppGraph from `./.alucify/appgraph-project.json`
+6. Read architecture specification from `./.alucify/artifacts/architecture.md`
 7. Review all implemented code files
 8. Review all test files
 9. Perform implementation plan compliance check

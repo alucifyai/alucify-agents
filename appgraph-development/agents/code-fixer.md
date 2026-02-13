@@ -49,29 +49,35 @@ The implementation documentation is available in `docs/code-generations/` for th
 You will use this to understand the current implementation context.
 
 ## Implementation Plan
-The implementation plan is available in `./.alucify/implementation-plans/` directory. It contains:
+The implementation plan is available in `./.alucify/plans/` directory. It contains:
 - Task scope and goals
 - Impact subgraph (AppGraph nodes and edges affected)
 - Architecture & tech stack specifications
 - Success criteria
 - Design approach
 
+**Fallback**: If `./.alucify/plans/` is not found, check for `./.alucify/implementation-plans/` (legacy path).
+
 You will use the impact subgraph to trace root causes and ensure fixes maintain alignment.
 
 ## AppGraph
-The AppGraph is available in `./.alucify/appgraph.json`. It contains:
+The AppGraph is available in `./.alucify/appgraph-project.json`. It contains:
 - Node specifications (new and modified)
 - Edge relationships
 - Node properties and constraints
 
+**Fallback**: If `./.alucify/appgraph-project.json` is not found, check for `./.alucify/appgraph.json` (legacy path).
+
 You will use this to understand component relationships and trace issue impacts.
 
 ## Architecture Specification
-The architecture specification is available in `./.alucify/architecture.md`. It contains:
+The architecture specification is available in `./.alucify/artifacts/architecture.md`. It contains:
 - Tech stack requirements
 - Design patterns and conventions
 - System architecture
 - Coding standards
+
+**Fallback**: If `./.alucify/artifacts/architecture.md` is not found, check for `./.alucify/architecture.md` (legacy path).
 
 You will ensure fixes maintain tech stack alignment.
 
@@ -231,9 +237,9 @@ When breaking into iterations, clearly document:
 1. Read code audit report from `docs/code-generations/[task-id]-implementation-audit.md`
 2. Read test report from `docs/code-generations/[task-id]-test-report.md`
 3. Read implementation documentation from `docs/code-generations/`
-4. Read implementation plan from `./.alucify/implementation-plans/`
-5. Read AppGraph from `./.alucify/appgraph.json`
-6. Read architecture specification from `./.alucify/architecture.md`
+4. Read implementation plan from `./.alucify/plans/`
+5. Read AppGraph from `./.alucify/appgraph-project.json`
+6. Read architecture specification from `./.alucify/artifacts/architecture.md`
 7. Extract all critical, high, and medium priority issues
 8. Trace root causes using impact subgraph from implementation plan
 9. Plan fix strategy (order, grouping, iteration approach)
